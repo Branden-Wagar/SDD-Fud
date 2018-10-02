@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Fud</string>
+    <string name="app_title">FUD</string>
+    <string name="eventsList">Events List</string>
+    <string name="eventFilters">Event Filters</string>
+    <string name="CreateEventLabel">Create Event</string>
+    <string name="Filters">Filters</string>
+    <string name="CreateEventTitle">Create New Event</string>
+</resources>
