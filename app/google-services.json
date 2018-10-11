@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "377741121208",
+    "firebase_url": "https://fud-sdd.firebaseio.com",
+    "project_id": "fud-sdd",
+    "storage_bucket": "fud-sdd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:377741121208:android:4c3a72558b70acaf",
+        "android_client_info": {
+          "package_name": "fud.fud"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "377741121208-skucroo71h71s3vtcc7cbl1osougoc8i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "fud.fud",
+            "certificate_hash": "99af463e5ae47da6982b8ec76c5b2b6cc3ffa6f8"
+          }
+        },
+        {
+          "client_id": "377741121208-dldhqck8gbc7e93cun4mguqsbjt54mbf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-9AEQsXpW-NStBJmQF7ZPuGfSRIrwphA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "377741121208-dldhqck8gbc7e93cun4mguqsbjt54mbf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
