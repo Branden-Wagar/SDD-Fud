@@ -3,6 +3,7 @@ package fud.fud
 import android.app.Activity
 import android.databinding.DataBindingUtil
 import android.os.Bundle
+import com.google.firebase.firestore.FirebaseFirestore
 import fud.fud.databinding.ActivityMainBinding
 
 class MainActivity : Activity() {
