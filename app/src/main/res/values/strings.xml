@@ -6,4 +6,6 @@
     <string name="CreateEventLabel">Create Event</string>
     <string name="Filters">Filters</string>
     <string name="CreateEventTitle">Create New Event</string>
+    <string name="title_activity_event_details">EventDetails</string>
+    <string name="title_activity_routing">Map</string>
 </resources>

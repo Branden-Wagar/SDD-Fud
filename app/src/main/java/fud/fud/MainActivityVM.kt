@@ -1,8 +1,10 @@
 package fud.fud
 
+import android.content.Intent
 import android.databinding.BaseObservable
 import android.databinding.Bindable
 import android.databinding.Observable
+import android.support.v4.content.ContextCompat.startActivity
 
 class MainActivityVM(var Filter1: String, val Filter2: String) : BaseObservable() {
 
@@ -31,10 +33,10 @@ class MainActivityVM(var Filter1: String, val Filter2: String) : BaseObservable(
         notifyPropertyChanged(BR.filterFour)
     }
 
-    fun onclickCreateEvent(){
+    //fun onclickCreateEvent(){
        //filter3 = "Bye"
-        setFilterFour("Bye")
-    }
+        //setFilterFour("Bye")
+    //}
 
 
 
