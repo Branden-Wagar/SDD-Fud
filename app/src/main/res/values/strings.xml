@@ -6,4 +6,20 @@
     <string name="CreateEventLabel">Create Event</string>
     <string name="Filters">Filters</string>
     <string name="CreateEventTitle">Create New Event</string>
+    <string name="MaxDistanceLabel">Max Distance</string>
+    <string name="MaxPriceLabel">Price Limit</string>
+    <string-array name="planets_array">
+        <item>Chinese</item>
+        <item>Italian</item>
+        <item>BBQ</item>
+        <item>Pizza</item>
+        <item>American</item>
+        <item>Mexican</item>
+        <item>Halal</item>
+        <item>Desserts</item>
+        <item>Free Candy!</item>
+    </string-array>
+
+    <string name="title_activity_event_details">EventDetails</string>
+    <string name="title_activity_routing">Map</string>
 </resources>

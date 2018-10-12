@@ -88,18 +88,44 @@
                 tools:text="Filter 1" />
 
             <Switch
-                android:id="@+id/Filter2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@{mainvm.filter2}"
-                tools:text="Filter 2" />
-
-            <Switch
                 android:id="@+id/Filter3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@={mainvm.filterFour}"
                 tools:text="Filter 3" />
+
+            <TextView
+                android:id="@+id/DistanceLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/MaxDistanceLabel"
+                android:textAlignment="center"
+                android:textStyle="bold" />
+
+            <SeekBar
+                android:id="@+id/DistanceSeekBar"
+                android:layout_width="match_parent"
+                android:layout_height="40dp" />
+
+
+            <TextView
+                android:id="@+id/PriceLimitLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/MaxPriceLabel"
+                android:textAlignment="center"
+                android:textStyle="bold" />
+
+            <SeekBar
+                android:id="@+id/PriceLimitSeekBar"
+                android:layout_width="match_parent"
+                android:layout_height="40dp" />
+
+
+            <Spinner
+                android:id="@+id/FoodTagsSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
         </LinearLayout>
 
 
@@ -130,7 +156,7 @@
             app:layout_constraintEnd_toStartOf="@+id/CenterLine"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/FiltersLayout"
-            android:onClickListener="@{() -> mainvm.onclickCreateEvent()}"/>
+/>            //android:onClickListener="@{() -> mainvm.onclickCreateEvent()}"/>
 
 
 
