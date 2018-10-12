@@ -5,6 +5,7 @@ import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.widget.Button
+import com.google.firebase.firestore.FirebaseFirestore
 import fud.fud.databinding.ActivityMainBinding
 
 class MainActivity : Activity() {
