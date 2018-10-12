@@ -18,7 +18,7 @@ class EventDetails : Activity() {
         })
         val button2: Button =findViewById(R.id.button) as Button
         button2.setOnClickListener({
-            startActivity(Intent(this, Routing::class.java))
+            startActivity(Intent(this, CreateEvent::class.java))
         })
     }
 
