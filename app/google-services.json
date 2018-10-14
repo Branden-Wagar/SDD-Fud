@@ -49,6 +49,50 @@
           "status": 2
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:377741121208:android:07612a20e7874979",
+        "android_client_info": {
+          "package_name": "fud.fud.Database"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "377741121208-r0jkupf3dd0vaf0ko2i2qu63crqa5f5o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "fud.fud.Database",
+            "certificate_hash": "99af463e5ae47da6982b8ec76c5b2b6cc3ffa6f8"
+          }
+        },
+        {
+          "client_id": "377741121208-dldhqck8gbc7e93cun4mguqsbjt54mbf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-9AEQsXpW-NStBJmQF7ZPuGfSRIrwphA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "377741121208-dldhqck8gbc7e93cun4mguqsbjt54mbf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
     }
   ],
   "configuration_version": "1"

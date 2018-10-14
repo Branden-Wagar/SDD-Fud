@@ -3,10 +3,12 @@ package fud.fud.Models;
 import java.util.Date;
 
 public class Event {
-    private Date date;
-    private String address;
-    private String description;
-    private String cuisineType;
+    public Date date;
+    public String address;
+    public String description;
+    public String cuisineType;
+    public double distanceToUser;
+    public double price;
 
     // TODO: Implement User class eventually
     // private User user;
