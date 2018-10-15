@@ -8,7 +8,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
+
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -46,7 +46,7 @@ public class DatabaseManager implements EventQueryInterface {
      * @param e - Event to add to the database
      */
     public void add(Event e) {
-        this.add(e, KeyStore.EVENT_TABLE_NAME);
+        this.add(e, KeyStore.EVENT_TABLE_NAME, e.eventName);
     }
 
     /**
@@ -55,19 +55,20 @@ public class DatabaseManager implements EventQueryInterface {
      * @param collection - Name of collection object is being added to.
      * @param <T> - Generic type handling
      */
-    private <T> void add(T obj, String collection) {
+    private <T> void add(T obj, String collection, String document) {
         db.collection(collection)
-                .add(obj)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                .document(document)
+                .set(obj)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully written!");
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error adding document", e);
+                        Log.w(TAG, "Error writing document", e);
                     }
                 });
     }
@@ -75,23 +76,10 @@ public class DatabaseManager implements EventQueryInterface {
     /**
      * Get all objects in a collection.
      * @param collectionName - Name of the collection in which the objects are stored.
-     * @return a QuerySnapShot of all of the objects in the collection
+     * @return a list of all of the objects in the collection
      */
     private Task<QuerySnapshot> getAll(String collectionName) {
-        return eventCollection
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
-                                Log.d(TAG, document.getId() + " => " + document.getData());
-                            }
-                        } else {
-                            Log.d(TAG, "Error getting documents: ", task.getException());
-                        }
-                    }
-                });
+        return db.collection(collectionName).get();
     }
 
     /**
@@ -104,19 +92,7 @@ public class DatabaseManager implements EventQueryInterface {
     public Task<QuerySnapshot> getLocalEvents(double distanceToUser, double withInMaximumDistance) {
         return eventCollection
                 .whereGreaterThan(KeyStore.EVENT_DISTANCE, withInMaximumDistance)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
-                                Log.d(TAG, document.getId() + " => " + document.getData());
-                            }
-                        } else {
-                            Log.d(TAG, "Error getting documents: ", task.getException());
-                        }
-                    }
-                });
+                .get();
     }
 
     /**
@@ -126,22 +102,11 @@ public class DatabaseManager implements EventQueryInterface {
      * cuisine type.
      */
     @Override
-    public Task<QuerySnapshot> getCuisineFilteredFoodEvents(String cuisineType) {
+    public Task<QuerySnapshot> getCuisineFilteredFoodEvents(String cuisineType) throws InterruptedException {
+
         return eventCollection
-                .whereEqualTo(KeyStore.EVENT_CUISINE_TYPE, cuisineType)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
-                                Log.d(TAG, document.getId() + " => " + document.getData());
-                            }
-                        } else {
-                            Log.d(TAG, "Error getting documents: ", task.getException());
-                        }
-                    }
-                });
+            .whereEqualTo(KeyStore.EVENT_CUISINE_TYPE, cuisineType)
+            .get();
     }
 
     /**
@@ -153,19 +118,7 @@ public class DatabaseManager implements EventQueryInterface {
     public Task<QuerySnapshot> getPriceFilteredEvents(double maximumPrice) {
         return eventCollection
                 .whereLessThanOrEqualTo(KeyStore.EVENT_PRICE, maximumPrice)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
-                                Log.d(TAG, document.getId() + " => " + document.getData());
-                            }
-                        } else {
-                            Log.d(TAG, "Error getting documents: ", task.getException());
-                        }
-                    }
-                });
+                .get();
     }
     /**
      * Get all events up to a certain price.
@@ -178,19 +131,7 @@ public class DatabaseManager implements EventQueryInterface {
         return eventCollection
                 .whereLessThanOrEqualTo(KeyStore.EVENT_PRICE, maximumPrice)
                 .whereGreaterThanOrEqualTo(KeyStore.EVENT_PRICE, minimumPrice)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
-                                Log.d(TAG, document.getId() + " => " + document.getData());
-                            }
-                        } else {
-                            Log.d(TAG, "Error getting documents: ", task.getException());
-                        }
-                    }
-                });
+                .get();
     }
 
     /**
@@ -210,19 +151,7 @@ public class DatabaseManager implements EventQueryInterface {
     public Task<QuerySnapshot> getTodayEvents() {
         return eventCollection
                 .whereEqualTo(KeyStore.EVENT_DATE, java.time.LocalDate.now())
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
-                                Log.d(TAG, document.getId() + " => " + document.getData());
-                            }
-                        } else {
-                            Log.d(TAG, "Error getting documents: ", task.getException());
-                        }
-                    }
-                });
+                .get();
     }
 
     /**
@@ -234,19 +163,7 @@ public class DatabaseManager implements EventQueryInterface {
     public Task<QuerySnapshot> getDateSpecificEvents(Date date) {
         return eventCollection
                 .whereEqualTo(KeyStore.EVENT_DATE, date)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
-                                Log.d(TAG, document.getId() + " => " + document.getData());
-                            }
-                        } else {
-                            Log.d(TAG, "Error getting documents: ", task.getException());
-                        }
-                    }
-                });
+                .get();
     }
 
     /*

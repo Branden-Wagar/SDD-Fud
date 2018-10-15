@@ -1,7 +1,6 @@
 package fud.fud.Database;
 
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.Date;
@@ -12,7 +11,7 @@ import java.util.Date;
 public interface EventQueryInterface {
     Task<QuerySnapshot> getLocalEvents(double distanceToUser, double withInMileageRange);
 
-    Task<QuerySnapshot> getCuisineFilteredFoodEvents(String cuisineType);
+    Task<QuerySnapshot> getCuisineFilteredFoodEvents(String cuisineType) throws InterruptedException;
 
     Task<QuerySnapshot> getPriceFilteredEvents(double maximumPrice);
 
