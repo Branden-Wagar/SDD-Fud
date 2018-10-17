@@ -12,14 +12,19 @@ class EventDetails : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_event_details)
-        val button: Button =findViewById(R.id.button2) as Button
+        val button: Button =findViewById(R.id.button) as Button
         button.setOnClickListener({
             startActivity(Intent(this, MainActivity::class.java))
         })
-        val button2: Button =findViewById(R.id.button) as Button
+        val button2: Button =findViewById(R.id.button2) as Button
         button2.setOnClickListener({
+            startActivity(Intent(this, FakeEvent::class.java))
+        })
+        val button3: Button =findViewById(R.id.button3) as Button
+        button3.setOnClickListener({
             startActivity(Intent(this, CreateEvent::class.java))
         })
     }
 
+    
 }
