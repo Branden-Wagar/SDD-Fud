@@ -1,13 +1,20 @@
 package fud.fud
 
 import android.app.Activity
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
+import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Button
+import com.google.android.gms.tasks.OnSuccessListener
+import com.google.android.gms.tasks.Task
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.QueryDocumentSnapshot
+import com.google.firebase.firestore.QuerySnapshot
 import fud.fud.Database.DatabaseManager
 import fud.fud.Models.Event
 import fud.fud.databinding.ActivityMainBinding
@@ -32,12 +39,5 @@ class MainActivity : Activity() {
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             tagsSpinner.adapter = adapter
         }
-
-//        var db = FirebaseFirestore.getInstance()
-//
-//        var databaseManager = DatabaseManager(db)
-//
-//        databaseManager.add(Event(Date(), "123 fud st.", "Test", "chinese"))
-
     }
 }
