@@ -22,10 +22,9 @@ class MainActivityVM(var Filter1: String, val Filter2: String) : BaseObservable(
         notifyPropertyChanged(BR.filterFour)
     }
 
-    //fun onclickCreateEvent(){
-       //filter3 = "Bye"
-        //setFilterFour("Bye")
-    //}
+    fun onclickCreateEvent(){
+
+    }
 
 
 

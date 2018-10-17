@@ -34,7 +34,7 @@ class MainActivity : Activity() {
         }
 
         val tagsSpinner: Spinner = findViewById(R.id.FoodTagsSpinner)
-        val also = ArrayAdapter.createFromResource(this, R.array.planets_array,
+        ArrayAdapter.createFromResource(this, R.array.planets_array,
                 android.R.layout.simple_spinner_dropdown_item).also { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             tagsSpinner.adapter = adapter

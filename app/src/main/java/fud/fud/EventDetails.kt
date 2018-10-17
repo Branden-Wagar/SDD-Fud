@@ -2,8 +2,14 @@ package fud.fud
 
 import android.os.Bundle
 import android.app.Activity
+import android.arch.lifecycle.LifecycleOwner
+import android.arch.lifecycle.ViewModel
+import android.arch.lifecycle.ViewModelProvider
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
+import android.databinding.DataBindingUtil
 import android.widget.Button
+import fud.fud.databinding.ActivityEventDetailsBinding
 
 import kotlinx.android.synthetic.main.activity_event_details.*
 
@@ -13,9 +19,11 @@ class EventDetails : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_event_details)
         val button: Button =findViewById(R.id.RouteButton) as Button
-        button.setOnClickListener({
-            startActivity(Intent(this, MainActivity::class.java))
-        })
+
+        val binding: ActivityEventDetailsBinding = DataBindingUtil.setContentView(this, R.layout.activity_event_details)
+        binding.eventDetailsVM = EventDetailsVM()
+
+
         val button2: Button =findViewById(R.id.FakeButton) as Button
         button2.setOnClickListener({
             startActivity(Intent(this, FakeEvent::class.java))
