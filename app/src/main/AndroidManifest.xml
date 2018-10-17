@@ -39,9 +39,10 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
+        
         <activity
-            android:name=".Routing"
-            android:label="@string/title_activity_routing"></activity>
+            android:name=".FakeEvent"
+            android:label="@string/title_activity_fake_event"></activity>
     </application>
 
 </manifest>

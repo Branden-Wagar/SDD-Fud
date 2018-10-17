@@ -26,5 +26,6 @@ class EventDetails : Activity() {
         })
     }
 
-    
+
+
 }
