@@ -3,18 +3,15 @@ package fud.fud.Database;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.Date;
-import java.util.Objects;
 
 import fud.fud.Models.Event;
 
@@ -25,7 +22,7 @@ import static android.content.ContentValues.TAG;
  * NOTE: All database tasks should be handled by a
  * DatabaseManager object.
  */
-public class DatabaseManager implements EventQueryInterface {
+public class DatabaseManager implements IEventQuery {
 
     private FirebaseFirestore db;
     private static CollectionReference eventCollection;

@@ -8,7 +8,7 @@ import java.util.Date;
 /**
  * A query interface for all supported event queries.
  */
-public interface EventQueryInterface {
+public interface IEventQuery {
     Task<QuerySnapshot> getLocalEvents(double distanceToUser, double withInMileageRange);
 
     Task<QuerySnapshot> getCuisineFilteredFoodEvents(String cuisineType) throws InterruptedException;
