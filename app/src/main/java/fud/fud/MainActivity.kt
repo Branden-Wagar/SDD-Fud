@@ -39,5 +39,6 @@ class MainActivity : Activity() {
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             tagsSpinner.adapter = adapter
         }
+
     }
 }

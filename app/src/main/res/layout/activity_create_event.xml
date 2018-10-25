@@ -8,6 +8,7 @@
         <variable
             name="createEventVM"
             type="fud.fud.CreateEventVM" />
+        <import type="fud.fud.StringValidationRules" />
     </data>
 
 
@@ -32,7 +33,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.263"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/FudTitle"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
@@ -72,13 +72,13 @@
         <EditText
             android:id="@+id/PriceBox"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="64dp"
             android:layout_marginTop="18dp"
             android:layout_marginEnd="64dp"
             android:ems="10"
             android:hint="Enter Amount (x.xx)"
-            android:inputType="numberDecimal"
+            android:text="@={createEventVM.maxPrice}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/FoodTypeSpinner" />
@@ -93,7 +93,7 @@
             android:layout_marginBottom="18dp"
             android:ems="10"
             android:hint="EndTime"
-            android:inputType="time"
+            android:text="@={createEventVM.endTime}"
             app:layout_constraintBottom_toTopOf="@+id/EventDetailsBox"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -130,6 +130,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            android:onClickListener="@{() -> createEventVM.onClickCreateButton()}"
             app:layout_constraintTop_toBottomOf="@+id/EventDetailsBox" />
 
     </android.support.constraint.ConstraintLayout>
