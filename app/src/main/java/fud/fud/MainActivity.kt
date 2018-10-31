@@ -9,6 +9,7 @@ import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Button
+import android.widget.ListView
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.DocumentSnapshot
@@ -20,7 +21,9 @@ import fud.fud.Models.Event
 import fud.fud.databinding.ActivityMainBinding
 import java.util.*
 
+
 class MainActivity : Activity() {
+    private lateinit var lv: ListView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,10 +31,29 @@ class MainActivity : Activity() {
         val binding: ActivityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.mainvm = MainActivityVM("Free Food Only", "Who cares")
 
-        val button: Button = findViewById(R.id.CreateEventButton)
+        /*val button: Button = findViewById(R.id.CreateEventButton)
         button.setOnClickListener {
             startActivity(Intent(this, EventDetails::class.java))
+        }*/
+
+        lv = findViewById<ListView>(R.id.EventsList);
+        val events = arrayListOf<Event>();
+        /*var dbInstance = FirebaseFirestore.getInstance()
+        var dbManager = DatabaseManager(dbInstance)
+        dbManager.allEvents.addOnCompleteListener {
+            task -> if (task.isSuccessful)
+            task.result!!.forEach {
+                it ->
+                // Do something with data
+                Event event = it.data.toObject(Event.class);
+            }
+        }*/
+        val listItems =arrayOfNulls<String>(20)
+        for (i in 0 until 20){
+            listItems[i]="TEST"
         }
+        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1,listItems)
+        lv.adapter = adapter
 
         val tagsSpinner: Spinner = findViewById(R.id.FoodTagsSpinner)
         ArrayAdapter.createFromResource(this, R.array.planets_array,
