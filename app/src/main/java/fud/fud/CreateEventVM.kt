@@ -1,66 +1,78 @@
 package fud.fud
 
-import android.databinding.BaseObservable
-import android.databinding.Bindable
-import java.sql.Time
-import android.widget.TextView
-import android.databinding.InverseBindingAdapter
+import android.arch.lifecycle.ViewModel
+import android.databinding.ObservableField
+import fud.fud.Models.Event
+import java.sql.Date
+import java.time.Instant
+import android.text.Editable
+import android.text.TextWatcher
+import android.widget.EditText
 import android.databinding.BindingAdapter
+import com.google.firebase.firestore.FirebaseFirestore
+import fud.fud.Database.DatabaseManager
 
 
+class CreateEventVM(var Name : String? = null) : ViewModel() {
 
-class CreateEventVM(var Name : String? = null) : BaseObservable() {
 
+    var EndTime = ObservableField<String>("1:30")
+    var EventName = ObservableField<String>("")
+    var MaxPrice = ObservableField<String>("0.0")
+    var EventDesc = ObservableField<String>("")
 
-    private var _eventName : String? = null;
-    private var _maxPrice : Double = 0.0;
-    private var _endTime : Time? = null;
-    private var _eventDesc : String? = null;
+    val foodTag = ObservableField<String>()
 
-    @Bindable
-    fun getEventName() : String?{
-        return _eventName
-    }
-
-    fun setEventName(value: String?) {
-        if (value != _eventName){
-            _eventName = value
+    fun onClickCreateButton(){
+        var toSubmit = Event()
+        //toSubmit.cuisineType = foodTag.toString()
+        toSubmit.date = Date.from(Instant.now())
+        toSubmit.description = EventDesc.get()
+        toSubmit.eventName = EventName.get()
+        val tprice: Double? = MaxPrice.get()!!.toDoubleOrNull()
+        if (tprice == null){
+            throw error("Invalid price")
         }
-        notifyPropertyChanged(BR.eventName)
+        else{
+            toSubmit.price = tprice.toDouble()
+        }
+
+        val db = DatabaseManager(FirebaseFirestore.getInstance())
+        db.add(toSubmit)
     }
 
-    @Bindable
-    fun getMaxPrice() : Double{
-        return _maxPrice
-    }
-    fun setMaxPrice(value : Double){
-        if (value != _maxPrice){
-            _maxPrice = value
-        }
-        notifyPropertyChanged(BR.maxPrice)
+    fun validatePrice() : Boolean{
+        var maxPrice: String? = MaxPrice.get() ?: return false
+        var mpriceDouble = maxPrice?.toDoubleOrNull() ?: return false
+
+        return mpriceDouble >= 0
+
     }
 
-    @Bindable
-    fun getEndTime() : Time?{
-        return _endTime
-    }
-    fun setEndTime(value: Time?){
-        if (value != _endTime){
-            _endTime = value
-        }
-        notifyPropertyChanged(BR.endTime)
+    @BindingAdapter("app:validation", "app:errorMsg")
+    fun setErrorEnable(editText: EditText, stringRule: StringValidationRules.StringRule, errorMsg: String) {
+        editText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
+
+            }
+
+            override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
+
+            }
+
+            override fun afterTextChanged(editable: Editable) {
+                if (stringRule.validate(editText.text)) {
+                    editText.error = errorMsg
+                } else {
+                    editText.error = null
+                }
+            }
+        })
     }
 
-    @Bindable
-    fun getEventDesc() : String?{
-        return _eventDesc
-    }
-    fun setEventDesc(value : String?){
-        if (value != _eventDesc){
-            _eventDesc = value
-        }
-        notifyPropertyChanged(BR.eventDesc)
-    }
+
+
+    /*
 
 
     @BindingAdapter("android:text")
@@ -72,6 +84,6 @@ class CreateEventVM(var Name : String? = null) : BaseObservable() {
     fun getText(view: TextView): Double {
         return view.text.toString().toDouble()
     }
-
+    */
 
 }
