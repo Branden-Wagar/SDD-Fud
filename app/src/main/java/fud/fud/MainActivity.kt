@@ -49,8 +49,8 @@ class MainActivity : Activity() {
             }
         }*/
         val listItems =arrayOfNulls<String>(20)
-        for (i in 0 until 20){
-            listItems[i]="TEST"
+        for (i in 0 until 20) {
+            listItems[i]= "TEST$i"
         }
         val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1,listItems)
         lv.adapter = adapter
