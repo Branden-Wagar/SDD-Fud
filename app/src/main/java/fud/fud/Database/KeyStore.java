@@ -48,11 +48,9 @@ class KeyStore {
 
     static {
         try {
-            EVENT_CUISINE_TYPE = Event.class.getField("price").getName();
+            EVENT_PRICE = Event.class.getField("price").getName();
         } catch (NoSuchFieldException e) {
             e.printStackTrace();
         }
     }
-
-
 }

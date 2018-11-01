@@ -9,7 +9,7 @@ import android.databinding.ObservableField
 import fud.fud.Models.Event
 
 
-public class EventDetailsVM : ViewModel() {
+class EventDetailsVM : ViewModel() {
 
 
     var eventName = MutableLiveData<String>()
