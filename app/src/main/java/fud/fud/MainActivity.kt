@@ -39,16 +39,17 @@ class MainActivity : Activity() {
         }*/
 
         lv = findViewById<ListView>(R.id.EventsList);
-        val events = mutableListOf<Event>();
+        val events = arrayListOf<String>();
         var dbInstance = FirebaseFirestore.getInstance()
         var dbManager = DatabaseManager(dbInstance)
         dbManager.allEvents.addOnCompleteListener {
-            task -> if (task.isSuccessful)
-            task.result!!.forEach {
-                it ->
-                events.add(it.data as Event)
-
+            task -> if (task.isSuccessful()){
+            var temp = task.getResult()
+                temp!!.forEach {
+                    events.add(it.toObject(Event::class.java).toString())
+                }
             }
+
         }
 
 
