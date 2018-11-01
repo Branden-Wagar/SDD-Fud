@@ -51,4 +51,21 @@ public class Event {
     public void setCuisineType(String s) { cuisineType = s; }
     public void setDistanceToUser(double d) { distanceToUser = d; }
     public void setPrice(double d) { price = d; }
+
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+        String NL = System.getProperty("line.separator");
+
+        result.append(this.getClass().getName() + " Object {" + NL);
+        result.append(" Event Name: " + eventName + NL);
+        result.append(" Date: " + date.toString() + NL);
+        result.append(" Address: " + address + NL );
+        result.append(" Description: " + description + NL);
+        result.append(" Cuisine Type: " + cuisineType + NL );
+        result.append(" Distance to user: " + distanceToUser + NL);
+        result.append(" Price: " + price + NL);
+        result.append("}");
+
+        return result.toString();
+    }
 }
