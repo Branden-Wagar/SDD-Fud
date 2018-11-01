@@ -1,113 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".CreateEvent">
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View" />
+        <variable
+            name="createEventVM"
+            type="fud.fud.CreateEventVM" />
+    </data>
 
 
-    <TextView
-        android:id="@+id/FudTitle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/CreateEventTitle"
-        android:textAlignment="center"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.263"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".CreateEvent">
 
-    <EditText
-        android:id="@+id/EventNameBox"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="84dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="85dp"
-        android:ems="10"
-        android:hint="Enter Event Name"
-        android:inputType="text"
-        android:text="Event Name"
-        android:textAlignment="viewStart"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/FudTitle" />
 
-    <Spinner
-        android:id="@+id/FoodTypeSpinner"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/EventNameBox" />
+        <TextView
+            android:id="@+id/FudTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/CreateEventTitle"
+            android:textAlignment="center"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/EventNameBox"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.263"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/FudTitle"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/EndTimeBox"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="84dp"
-        android:layout_marginTop="13dp"
-        android:layout_marginEnd="84dp"
-        android:layout_marginBottom="13dp"
-        android:ems="10"
-        android:hint="EndTime"
-        android:inputType="time"
-        app:layout_constraintBottom_toTopOf="@+id/EventDetailsBox"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/PriceBox" />
+        <EditText
+            android:id="@+id/EventNameBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="84dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="85dp"
+            android:layout_marginBottom="18dp"
+            android:ems="10"
+            android:hint="Enter Event Name"
+            android:inputType="text"
+            android:text="@={createEventVM.eventName}"
+            android:textAlignment="viewStart"
+            app:layout_constraintBottom_toTopOf="@+id/FoodTypeSpinner"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/FudTitle"
+            app:layout_constraintVertical_chainStyle="spread" />
 
-    <EditText
-        android:id="@+id/EventDetailsBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
-        android:ems="10"
-        android:hint="Further Event Details"
-        android:inputType="textMultiLine"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/EndTimeBox" />
+        <Spinner
+            android:id="@+id/FoodTypeSpinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="18dp"
+            app:layout_constraintBottom_toTopOf="@+id/PriceBox"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/EventNameBox" />
 
-    <Button
-        android:id="@+id/CreateEventButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="128dp"
-        android:layout_marginTop="64dp"
-        android:layout_marginEnd="128dp"
-        android:layout_marginBottom="16dp"
-        android:text="Create Event"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/EventDetailsBox" />
+        <EditText
+            android:id="@+id/PriceBox"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="64dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="64dp"
+            android:ems="10"
+            android:hint="Enter Amount (x.xx)"
+            android:inputType="numberDecimal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/FoodTypeSpinner" />
 
-    <EditText
-        android:id="@+id/PriceBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="84dp"
-        android:layout_marginTop="13dp"
-        android:layout_marginEnd="84dp"
-        android:layout_marginBottom="23dp"
-        android:hint="Enter Amount (x.xx)"
-        android:ems="10"
-        android:inputType="numberDecimal"
-        app:layout_constraintBottom_toTopOf="@+id/EndTimeBox"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/FoodTypeSpinner" />
+        <EditText
+            android:id="@+id/EndTimeBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="84dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="84dp"
+            android:layout_marginBottom="18dp"
+            android:ems="10"
+            android:hint="EndTime"
+            android:inputType="time"
+            app:layout_constraintBottom_toTopOf="@+id/EventDetailsBox"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/PriceBox" />
 
-</android.support.constraint.ConstraintLayout>
+        <EditText
+            android:id="@+id/EventDetailsBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="18dp"
+            android:ems="10"
+            android:hint="Further Event Details"
+            android:inputType="textMultiLine"
+            android:text="@={createEventVM.eventDesc}"
+            app:layout_constraintBottom_toTopOf="@+id/CreateEventButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/EndTimeBox" />
+
+
+        <Button
+            android:id="@+id/CreateEventButton"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="128dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="128dp"
+            android:layout_marginBottom="16dp"
+            android:text="Create Event"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/EventDetailsBox" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</layout>

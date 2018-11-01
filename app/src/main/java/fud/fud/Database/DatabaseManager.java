@@ -43,7 +43,7 @@ public class DatabaseManager implements IEventQuery {
      * @param e - Event to add to the database
      */
     public void add(Event e) {
-        this.add(e, KeyStore.EVENT_TABLE_NAME, e.eventName);
+        this.add(e, KeyStore.EVENT_TABLE_NAME, e.getEventName());
     }
 
     /**

@@ -1,87 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View" />
+        <variable
+            name="eventDetailsVM"
+            type="fud.fud.EventDetailsVM" />
+    </data>
+
+
+<android.support.constraint.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".EventDetails">
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="17dp"
-        android:layout_marginEnd="17dp"
-        android:layout_marginStart="175dp"
-        android:text="ROUTE"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button2" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginStart="16dp"
-        android:text="BACK"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/EventNameText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="85dp"
-        android:layout_marginStart="84dp"
-        android:layout_marginTop="44dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Description"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText3" />
-
-    <EditText
-        android:id="@+id/editText2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="148dp"
-        android:layout_marginEnd="85dp"
-        android:layout_marginStart="84dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Location"
-        app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
-        android:id="@+id/editText3"
-        android:layout_width="84dp"
-        android:layout_height="44dp"
-        android:layout_marginBottom="44dp"
-        android:layout_marginStart="275dp"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Distance"
-        app:layout_constraintBottom_toTopOf="@+id/editText"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/editText4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="44dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:layout_marginBottom="68dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Event Name"
-        app:layout_constraintEnd_toStartOf="@+id/editText3"
+        app:layout_constraintBottom_toTopOf="@+id/DescriptionText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <EditText
+        android:id="@+id/DistanceText"
+        android:layout_width="84dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="49dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="20dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Distance"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/EventNameText"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <EditText
+        android:id="@+id/DescriptionText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="75dp"
+        android:layout_marginEnd="94dp"
+        android:layout_marginBottom="79dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Description"
+        app:layout_constraintBottom_toTopOf="@+id/LocationText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/LocationText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="75dp"
+        android:layout_marginEnd="94dp"
+        android:layout_marginBottom="146dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="@={eventDetailsVM.filter4}"
+        app:layout_constraintBottom_toTopOf="@+id/RouteButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <Button
+        android:id="@+id/VerifyButton"
+        android:layout_width="88dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="44dp"
+        android:layout_marginBottom="16dp"
+        android:text="@={eventDetailsVM.filter4}"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/FakeButton"
+        app:layout_constraintStart_toStartOf="parent" />
+    <Button
+        android:id="@+id/RouteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="44dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="ROUTE"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/FakeButton" />
+
+    <Button
+        android:id="@+id/FakeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="145dp"
+        android:layout_marginBottom="16dp"
+        android:text="FAKE"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/VerifyButton"
+        app:layout_constraintTop_toBottomOf="@+id/LocationText" />
+
+
 </android.support.constraint.ConstraintLayout>
+
+</layout>
