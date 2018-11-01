@@ -6,8 +6,6 @@ import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import fud.fud.databinding.ActivityCreateEventBinding
-import fud.fud.databinding.ActivityMainBinding
-import kotlinx.android.synthetic.main.activity_create_event.*
 
 class CreateEvent : Activity() {
 
@@ -25,8 +23,5 @@ class CreateEvent : Activity() {
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             tagsSpinner.adapter = adapter
         }
-
-
-
     }
 }

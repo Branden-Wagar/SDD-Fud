@@ -101,7 +101,7 @@ public class DatabaseManager implements IEventQuery {
      * cuisine type.
      */
     @Override
-    public Task<QuerySnapshot> getCuisineFilteredFoodEvents(String cuisineType) throws InterruptedException {
+    public Task<QuerySnapshot> getCuisineFilteredFoodEvents(String cuisineType) {
 
         return eventCollection
             .whereEqualTo(KeyStore.EVENT_CUISINE_TYPE, cuisineType)

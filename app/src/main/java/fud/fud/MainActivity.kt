@@ -36,8 +36,8 @@ class MainActivity : Activity() {
             startActivity(Intent(this, EventDetails::class.java))
         }*/
 
-        lv = findViewById<ListView>(R.id.EventsList);
-        val events = arrayListOf<Event>();
+        lv = findViewById<ListView>(R.id.EventsList)
+        val events = arrayListOf<Event>()
         /*var dbInstance = FirebaseFirestore.getInstance()
         var dbManager = DatabaseManager(dbInstance)
         dbManager.allEvents.addOnCompleteListener {

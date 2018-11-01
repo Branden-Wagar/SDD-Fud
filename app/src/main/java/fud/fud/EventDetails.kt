@@ -18,17 +18,17 @@ class EventDetails : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_event_details)
-        val button: Button =findViewById(R.id.RouteButton) as Button
+        val button: Button = findViewById<Button>(R.id.RouteButton)
 
         val binding: ActivityEventDetailsBinding = DataBindingUtil.setContentView(this, R.layout.activity_event_details)
         binding.eventDetailsVM = EventDetailsVM()
 
 
-        val button2: Button =findViewById(R.id.FakeButton) as Button
+        val button2: Button = findViewById<Button>(R.id.FakeButton)
         button2.setOnClickListener({
             startActivity(Intent(this, FakeEvent::class.java))
         })
-        val button3: Button =findViewById(R.id.VerifyButton) as Button
+        val button3: Button = findViewById<Button>(R.id.VerifyButton)
         button3.setOnClickListener({
             startActivity(Intent(this, CreateEvent::class.java))
         })

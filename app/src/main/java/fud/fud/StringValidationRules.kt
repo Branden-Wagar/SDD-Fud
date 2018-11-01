@@ -4,8 +4,7 @@ import android.text.Editable
 import android.text.TextUtils
 
 
-
-public class StringValidationRules {
+class StringValidationRules {
     var NOT_EMPTY: StringRule = object : StringRule {
         override fun validate(s: Editable): Boolean {
             return TextUtils.isEmpty(s.toString())
@@ -27,7 +26,7 @@ public class StringValidationRules {
 
     var PRICE: StringRule = object : StringRule {
         override fun validate(s: Editable): Boolean {
-            var maxPrice: String? = s.toString() ?: return false
+            var maxPrice: String? = s.toString()
             var mpriceDouble = maxPrice?.toDoubleOrNull() ?: return false
 
             return mpriceDouble >= 0
