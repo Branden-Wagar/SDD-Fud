@@ -21,6 +21,8 @@ import static android.content.ContentValues.TAG;
  * Implement CRUD operations for firestore database.
  * NOTE: All database tasks should be handled by a
  * DatabaseManager object.
+ *
+ * TODO: Make this a singleton since no parallel operation
  */
 public class DatabaseManager implements IEventQuery {
 
