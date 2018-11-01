@@ -2,7 +2,6 @@ package fud.fud
 
 import android.databinding.BaseObservable
 import android.databinding.Bindable
-import android.databinding.Observable
 import com.google.firebase.firestore.FirebaseFirestore
 import fud.fud.Database.DatabaseManager
 import fud.fud.Models.Event

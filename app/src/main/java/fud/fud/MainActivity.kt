@@ -39,41 +39,32 @@ class MainActivity : Activity() {
         }*/
 
         lv = findViewById<ListView>(R.id.EventsList);
-        val events = arrayListOf<Event>();
-        /*var dbInstance = FirebaseFirestore.getInstance()
+        val events = mutableListOf<Event>();
+        var dbInstance = FirebaseFirestore.getInstance()
         var dbManager = DatabaseManager(dbInstance)
         dbManager.allEvents.addOnCompleteListener {
             task -> if (task.isSuccessful)
             task.result!!.forEach {
                 it ->
-                // Do something with data
-                Event event = it.data.toObject(Event.class);
-            }
-        }*/
+                events.add(it.data as Event)
 
-        var listEvents : Array<Event?> = arrayOfNulls<Event>(20)
-        for (i in 0 until 20){
-            var t : Event = Event()
-            t.price = Math.random() % 5
-            t.eventName = "Event" + i
-            t.date = Date.from(Instant.now())
-            t.distanceToUser = i.toDouble()
-            t.cuisineType = "Who cares"
-            listEvents[i] = t
+            }
         }
+
+
 
         val listItems =arrayOfNulls<String>(20)
         for (i in 0 until 20){
             listItems[i]="TEST"
         }
-        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1,listEvents)
+        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1,events)
         lv.adapter = adapter
 
         val tagsSpinner: Spinner = findViewById(R.id.FoodTagsSpinner)
         ArrayAdapter.createFromResource(this, R.array.planets_array,
-                android.R.layout.simple_spinner_dropdown_item).also { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            tagsSpinner.adapter = adapter
+                android.R.layout.simple_spinner_dropdown_item).also { adapter1 ->
+            adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            tagsSpinner.adapter = adapter1
         }
 
     }
