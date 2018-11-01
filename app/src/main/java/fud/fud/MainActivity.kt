@@ -19,6 +19,8 @@ import com.google.firebase.firestore.QuerySnapshot
 import fud.fud.Database.DatabaseManager
 import fud.fud.Models.Event
 import fud.fud.databinding.ActivityMainBinding
+import java.time.Instant
+import java.time.temporal.TemporalAmount
 import java.util.*
 
 
@@ -48,11 +50,23 @@ class MainActivity : Activity() {
                 Event event = it.data.toObject(Event.class);
             }
         }*/
+
+        var listEvents : Array<Event?> = arrayOfNulls<Event>(20)
+        for (i in 0 until 20){
+            var t : Event = Event()
+            t.price = Math.random() % 5
+            t.eventName = "Event" + i
+            t.date = Date.from(Instant.now())
+            t.distanceToUser = i.toDouble()
+            t.cuisineType = "Who cares"
+            listEvents[i] = t
+        }
+
         val listItems =arrayOfNulls<String>(20)
         for (i in 0 until 20){
             listItems[i]="TEST"
         }
-        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1,listItems)
+        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1,listEvents)
         lv.adapter = adapter
 
         val tagsSpinner: Spinner = findViewById(R.id.FoodTagsSpinner)
