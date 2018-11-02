@@ -24,9 +24,7 @@ class MainActivity : Activity() {
         val binding: ActivityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.mainvm = MainActivityVM("Free Food Only", "Who cares")
 
-        // setup our firebase connection
-        var dbInstance = FirebaseFirestore.getInstance()
-        var dbManager = DatabaseManager(dbInstance)
+
 
         val button: Button = findViewById(R.id.CreateEventButton)
         button.setOnClickListener {
@@ -34,24 +32,12 @@ class MainActivity : Activity() {
         }
 
 
-        lv = findViewById<ListView>(R.id.EventsList);
 
-        // events will be our list of events that have been converted to strings
-        val events = arrayListOf<String>();
-        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1,events)
 
-        dbManager.allEvents.addOnCompleteListener {
-            task -> if (task.isSuccessful()){
-            var temp = task.getResult()
-                temp!!.forEach {
-                    // foreach document we get from allEvents convert it to an Event
-                    val t = it.toObject(Event::class.java)
-                    events.add(t.toString()) // then put the string rep of the object in our events
-                    lv.adapter = adapter // update the UI with this Event info
-                }
-            }
+        populateList()
 
-        }
+
+
 
 
 
@@ -62,5 +48,30 @@ class MainActivity : Activity() {
             tagsSpinner.adapter = adapter1
         }
 
+    }
+    private fun populateList(){
+        // setup our firebase connection
+        lv = findViewById<ListView>(R.id.EventsList);
+        var dbInstance = FirebaseFirestore.getInstance()
+        var dbManager = DatabaseManager(dbInstance)
+        val events = arrayListOf<String>();
+        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1,events)
+
+        dbManager.allEvents.addOnCompleteListener {
+            task -> if (task.isSuccessful()){
+            var temp = task.getResult()
+            temp!!.forEach {
+                // foreach document we get from allEvents convert it to an Event
+                val t = it.toObject(Event::class.java)
+                events.add(t.toString()) // then put the string rep of the object in our events
+                lv.adapter = adapter // update the UI with this Event info
+            }
+        }
+
+        }
+    }
+    override fun onResume(){
+        super.onResume()
+        populateList()
     }
 }

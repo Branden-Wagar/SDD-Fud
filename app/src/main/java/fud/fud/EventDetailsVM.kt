@@ -14,7 +14,7 @@ class EventDetailsVM : ViewModel() {
 
     var eventName = MutableLiveData<String>()
 
-    var filter4 = ObservableField<String>("goodBye")
+    var filter4 = ObservableField<String>("Location")
 
 
 

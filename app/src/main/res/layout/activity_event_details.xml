@@ -82,7 +82,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="44dp"
         android:layout_marginBottom="16dp"
-        android:text="@={eventDetailsVM.filter4}"
+        android:text="VERIFY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/FakeButton"
         app:layout_constraintStart_toStartOf="parent" />

@@ -1,6 +1,7 @@
 package fud.fud
 
 import android.arch.lifecycle.ViewModel
+import android.content.Intent
 import android.databinding.ObservableField
 import fud.fud.Models.Event
 import java.sql.Date
@@ -9,6 +10,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.widget.EditText
 import android.databinding.BindingAdapter
+import android.support.v4.content.ContextCompat.startActivity
 import com.google.firebase.firestore.FirebaseFirestore
 import fud.fud.Database.DatabaseManager
 
@@ -39,6 +41,7 @@ class CreateEventVM(var Name : String? = null) : ViewModel() {
 
         val db = DatabaseManager(FirebaseFirestore.getInstance())
         db.add(toSubmit)
+        //startActivity(MainActivity::class.java)
     }
 
     fun validatePrice() : Boolean{
