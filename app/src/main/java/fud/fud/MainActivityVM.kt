@@ -6,7 +6,7 @@ import android.databinding.Observable
 
 class MainActivityVM(var Filter1: String, val Filter2: String) : BaseObservable() {
 
-    private var _filter4 = "HI"
+    private var _filter4 = "New Events"
 
 
 

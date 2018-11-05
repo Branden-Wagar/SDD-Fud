@@ -24,22 +24,12 @@ class MainActivity : Activity() {
         val binding: ActivityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.mainvm = MainActivityVM("Free Food Only", "Who cares")
 
-
-
         val button: Button = findViewById(R.id.CreateEventButton)
         button.setOnClickListener {
             startActivity(Intent(this, CreateEvent::class.java))
         }
 
-
-
-
         populateList()
-
-
-
-
-
 
         val tagsSpinner: Spinner = findViewById(R.id.FoodTagsSpinner)
         ArrayAdapter.createFromResource(this, R.array.planets_array,
@@ -51,12 +41,13 @@ class MainActivity : Activity() {
     }
     private fun populateList(){
         // setup our firebase connection
-        lv = findViewById<ListView>(R.id.EventsList);
         var dbInstance = FirebaseFirestore.getInstance()
         var dbManager = DatabaseManager(dbInstance)
+        //set up arrayLists for holding the information for the ListView
+        lv = findViewById<ListView>(R.id.EventsList);
         val events = arrayListOf<String>();
         val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1,events)
-
+        //get the information for each of the events
         dbManager.allEvents.addOnCompleteListener {
             task -> if (task.isSuccessful()){
             var temp = task.getResult()
@@ -66,10 +57,11 @@ class MainActivity : Activity() {
                 events.add(t.toString()) // then put the string rep of the object in our events
                 lv.adapter = adapter // update the UI with this Event info
             }
-        }
+            }
 
         }
     }
+    //on return to the page repopulate the ListView to push any changes to the database
     override fun onResume(){
         super.onResume()
         populateList()
