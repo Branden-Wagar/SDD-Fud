@@ -23,11 +23,11 @@ class EventDetails : Activity() {
         val binding: ActivityEventDetailsBinding = DataBindingUtil.setContentView(this, R.layout.activity_event_details)
         binding.eventDetailsVM = EventDetailsVM()
 
-
         val button2: Button = findViewById<Button>(R.id.FakeButton)
         button2.setOnClickListener({
             startActivity(Intent(this, FakeEvent::class.java))
         })
+
         val button3: Button = findViewById<Button>(R.id.VerifyButton)
         button3.setOnClickListener({
             startActivity(Intent(this, CreateEvent::class.java))

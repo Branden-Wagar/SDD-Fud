@@ -41,7 +41,7 @@ class CreateEventVM(var Name : String? = null) : ViewModel() {
 
         val db = DatabaseManager(FirebaseFirestore.getInstance())
         db.add(toSubmit)
-        //startActivity(MainActivity::class.java)
+        //need to add return to main activity here
     }
 
     fun validatePrice() : Boolean{

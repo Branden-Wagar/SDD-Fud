@@ -16,9 +16,6 @@ class EventDetailsVM : ViewModel() {
 
     var filter4 = ObservableField<String>("Location")
 
-
-
-
     fun eventDetailsClick(){
         if (eventName.value == null){
             eventName.setValue("Taco Party!")

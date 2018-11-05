@@ -16,7 +16,6 @@ class CreateEvent : Activity() {
         val binding: ActivityCreateEventBinding = DataBindingUtil.setContentView(this, R.layout.activity_create_event)
         binding.createEventVM = CreateEventVM()
 
-
         val tagsSpinner: Spinner = findViewById(R.id.FoodTypeSpinner)
         ArrayAdapter.createFromResource(this, R.array.planets_array,
                 android.R.layout.simple_spinner_dropdown_item).also { adapter ->
