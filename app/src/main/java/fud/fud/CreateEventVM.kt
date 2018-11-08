@@ -10,27 +10,36 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.widget.EditText
 import android.databinding.BindingAdapter
+import android.databinding.InverseBindingMethod
+import android.databinding.InverseBindingMethods
 import android.support.v4.content.ContextCompat.startActivity
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import com.google.firebase.firestore.FirebaseFirestore
 import fud.fud.Database.DatabaseManager
 
 
-class CreateEventVM(var Name : String? = null) : ViewModel() {
+
+
+class CreateEventVM(options: List<String>, curr: String, adapter: ArrayAdapter<String>) : ViewModel() {
 
 
     var EndTime = ObservableField<String>("1:30")
     var EventName = ObservableField<String>("")
     var MaxPrice = ObservableField<String>("0.0")
     var EventDesc = ObservableField<String>("")
-
-    val foodTag = ObservableField<String>()
+    val foodTagOptions : List<String> = options
+    var foodTag : ObservableField<String> = ObservableField(curr)
+    var adapter : ObservableField<ArrayAdapter<String>> = ObservableField(adapter)
+    var foodTagIndex : ObservableField<Int> = ObservableField(0)
 
     fun onClickCreateButton(){
         var toSubmit = Event()
-        //toSubmit.cuisineType = foodTag.toString()
         toSubmit.date = Date.from(Instant.now())
         toSubmit.description = EventDesc.get()
         toSubmit.eventName = EventName.get()
+        var index : Int = foodTagIndex.get()!!
+        toSubmit.cuisineType = foodTagOptions[index]
         val tprice: Double? = MaxPrice.get()!!.toDoubleOrNull()
         if (tprice == null){
             throw error("Invalid price")
@@ -52,41 +61,6 @@ class CreateEventVM(var Name : String? = null) : ViewModel() {
 
     }
 
-    @BindingAdapter("app:validation", "app:errorMsg")
-    fun setErrorEnable(editText: EditText, stringRule: StringValidationRules.StringRule, errorMsg: String) {
-        editText.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
 
-            }
-
-            override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
-
-            }
-
-            override fun afterTextChanged(editable: Editable) {
-                if (stringRule.validate(editText.text)) {
-                    editText.error = errorMsg
-                } else {
-                    editText.error = null
-                }
-            }
-        })
-    }
-
-
-
-    /*
-
-
-    @BindingAdapter("android:text")
-    fun setText(view: TextView, value: Double) {
-        view.text = String.format("%d", value)
-    }
-
-    @InverseBindingAdapter(attribute = "android:text")
-    fun getText(view: TextView): Double {
-        return view.text.toString().toDouble()
-    }
-    */
 
 }

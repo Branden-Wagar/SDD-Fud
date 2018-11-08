@@ -13,14 +13,18 @@ class CreateEvent : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_event)
 
-        val binding: ActivityCreateEventBinding = DataBindingUtil.setContentView(this, R.layout.activity_create_event)
-        binding.createEventVM = CreateEventVM()
 
-        val tagsSpinner: Spinner = findViewById(R.id.FoodTypeSpinner)
-        ArrayAdapter.createFromResource(this, R.array.planets_array,
-                android.R.layout.simple_spinner_dropdown_item).also { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            tagsSpinner.adapter = adapter
-        }
+        var t : ArrayList<String> = ArrayList(resources.getStringArray(R.array.food_tags).toList())
+
+        val adapter = ArrayAdapter<String>(
+                this, android.R.layout.simple_spinner_item, t)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
+
+        val binding: ActivityCreateEventBinding = DataBindingUtil.setContentView(this, R.layout.activity_create_event)
+        binding.createEventVM = CreateEventVM(t, "Chinese", adapter)
+
+
+
     }
 }

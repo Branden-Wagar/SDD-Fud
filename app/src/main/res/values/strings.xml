@@ -8,7 +8,7 @@
     <string name="CreateEventTitle">Create New Event</string>
     <string name="MaxDistanceLabel">Max Distance</string>
     <string name="MaxPriceLabel">Price Limit</string>
-    <string-array name="planets_array">
+    <string-array name="food_tags">
         <item>Chinese</item>
         <item>Italian</item>
         <item>BBQ</item>

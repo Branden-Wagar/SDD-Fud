@@ -32,7 +32,7 @@ class MainActivity : Activity() {
         populateList()
 
         val tagsSpinner: Spinner = findViewById(R.id.FoodTagsSpinner)
-        ArrayAdapter.createFromResource(this, R.array.planets_array,
+        ArrayAdapter.createFromResource(this, R.array.food_tags,
                 android.R.layout.simple_spinner_dropdown_item).also { adapter1 ->
             adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             tagsSpinner.adapter = adapter1
@@ -66,4 +66,5 @@ class MainActivity : Activity() {
         super.onResume()
         populateList()
     }
+
 }
