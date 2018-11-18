@@ -143,7 +143,7 @@
             app:layout_constraintStart_toStartOf="@+id/CenterLine"
             app:layout_constraintTop_toBottomOf="@+id/EventsTitle"
             android:adapter="@{mainvm.EventsListAdapter}"
-            android:onItemSelected=""/>
+            />
 
 
         <Button
