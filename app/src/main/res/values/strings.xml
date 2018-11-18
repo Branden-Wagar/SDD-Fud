@@ -21,6 +21,8 @@
     </string-array>
 
     <string name="title_activity_event_details">EventDetails</string>
-    <string name="title_activity_routing">Map</string>
+
     <string name="title_activity_fake_event">FakeEvent</string>
+    <string name="title_activity_route">Map</string>
+    <string name="title_activity_routing">Routing</string>
 </resources>

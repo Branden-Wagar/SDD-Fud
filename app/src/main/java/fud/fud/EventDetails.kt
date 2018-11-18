@@ -8,6 +8,7 @@ import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.databinding.DataBindingUtil
+import android.net.Uri
 import android.widget.Button
 import fud.fud.databinding.ActivityEventDetailsBinding
 
@@ -16,12 +17,18 @@ import kotlinx.android.synthetic.main.activity_event_details.*
 class EventDetails : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        val location = "geo:42.7302,-73.6788"
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_event_details)
-        val button: Button = findViewById<Button>(R.id.RouteButton)
+
 
         val binding: ActivityEventDetailsBinding = DataBindingUtil.setContentView(this, R.layout.activity_event_details)
         binding.eventDetailsVM = EventDetailsVM()
+
+        val button: Button = findViewById<Button>(R.id.RouteButton)
+        button.setOnClickListener({
+            startActivity(Intent(this, Routing::class.java))
+        })
 
         val button2: Button = findViewById<Button>(R.id.FakeButton)
         button2.setOnClickListener({
