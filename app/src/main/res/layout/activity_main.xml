@@ -125,7 +125,8 @@
             <Spinner
                 android:id="@+id/FoodTagsSpinner"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:adapter="@{mainvm.foodTypeFilters}"/>
         </LinearLayout>
 
 
@@ -140,7 +141,9 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/CenterLine"
-            app:layout_constraintTop_toBottomOf="@+id/EventsTitle" />
+            app:layout_constraintTop_toBottomOf="@+id/EventsTitle"
+            android:adapter="@{mainvm.EventsListAdapter}"
+            android:onItemSelected=""/>
 
 
         <Button
@@ -155,8 +158,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/CenterLine"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/FiltersLayout"
-/>            //android:onClickListener="@{() -> mainvm.onclickCreateEvent()}"/>
+            app:layout_constraintTop_toBottomOf="@+id/FiltersLayout" />
+        //android:onClickListener="@{() -> mainvm.onclickCreateEvent()}"/>
 
 
 

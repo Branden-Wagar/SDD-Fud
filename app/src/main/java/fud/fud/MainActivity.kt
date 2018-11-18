@@ -17,13 +17,20 @@ import fud.fud.databinding.ActivityMainBinding
 class MainActivity : Activity() {
     private lateinit var lv: ListView
 
+    private lateinit var activityVM : MainActivityVM
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         // databinding to MainActivityVM setup
-        val binding: ActivityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        binding.mainvm = MainActivityVM("Free Food Only", "Who cares")
 
+        var events = ArrayList<String>()
+        var adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, events)
+
+        val binding: ActivityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        activityVM = MainActivityVM(this)
+        binding.mainvm = activityVM
         val button: Button = findViewById(R.id.CreateEventButton)
         button.setOnClickListener {
             startActivity(Intent(this, EventDetails::class.java))
@@ -40,27 +47,12 @@ class MainActivity : Activity() {
 
     }
     private fun populateList(){
-        // setup our firebase connection
-        var dbInstance = FirebaseFirestore.getInstance()
-        var dbManager = DatabaseManager(dbInstance)
-        //set up arrayLists for holding the information for the ListView
         lv = findViewById<ListView>(R.id.EventsList);
-        val events = arrayListOf<String>();
-        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1,events)
+        activityVM.UpdateEventsList()
+        //lv.adapter = adapter
         //get the information for each of the events
-        dbManager.allEvents.addOnCompleteListener {
-            task -> if (task.isSuccessful()){
-            var temp = task.getResult()
-            temp!!.forEach {
-                // foreach document we get from allEvents convert it to an Event
-                val t = it.toObject(Event::class.java)
-                events.add(t.toString()) // then put the string rep of the object in our events
-                lv.adapter = adapter // update the UI with this Event info
-            }
-            }
-
-        }
     }
+
     //on return to the page repopulate the ListView to push any changes to the database
     override fun onResume(){
         super.onResume()
