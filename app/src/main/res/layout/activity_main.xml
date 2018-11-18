@@ -85,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:textAlignment="textStart"
                 android:text="@={mainvm.Filter1}"
-                tools:text="Filter 1" />
+                android:checked="@={mainvm.newEventOnly}"/>
 
             <Switch
                 android:id="@+id/Filter3"
@@ -142,9 +142,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/CenterLine"
             app:layout_constraintTop_toBottomOf="@+id/EventsTitle"
-            android:adapter="@{mainvm.EventsListAdapter}"
-            />
-
+            android:adapter="@{mainvm.EventsListAdapter}" />
 
         <Button
             android:id="@+id/CreateEventButton"

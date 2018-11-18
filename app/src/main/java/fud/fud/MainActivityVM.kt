@@ -17,11 +17,29 @@ import fud.fud.Models.Event
 class MainActivityVM( ct : Context) : BaseObservable() {
 
     private var _filter4 = "New Events"
-    public var Filter1 = ObservableField<String>("Filter 1")
-    public var EventsListAdapter = ObservableField<ArrayAdapter<String>>()
-    public var FoodTypeFilters = ObservableField<ArrayAdapter<String>>(ArrayAdapter<String>(ct, android.R.layout.simple_list_item_1, ct.resources.getStringArray(R.array.food_tags)))
+    var Filter1 = ObservableField<String>("Free Only")
+    var EventsListAdapter = ObservableField<ArrayAdapter<String>>()
+    var FoodTypeFilters = ObservableField<ArrayAdapter<String>>(ArrayAdapter<String>(ct, android.R.layout.simple_list_item_1, ct.resources.getStringArray(R.array.food_tags)))
     var parentContest = ct
 
+    private var _NewEventOnly = false
+
+    @Bindable
+    fun getNewEventOnly() : Boolean{
+        return _NewEventOnly
+    }
+    fun setNewEventOnly(input : Boolean){
+        if (input != _NewEventOnly){
+            _NewEventOnly = input
+            if (input){
+                filterNew()
+            }
+            else{
+                UpdateEventsList()
+            }
+        }
+        notifyPropertyChanged(BR.newEventOnly)
+    }
 
 
     @Bindable
@@ -46,7 +64,7 @@ class MainActivityVM( ct : Context) : BaseObservable() {
         var dbManager = DatabaseManager(dbInstance)
         //set up arrayLists for holding the information for the ListView
 
-        val events = arrayListOf<String>();
+        val events = arrayListOf<String>()
         //get the information for each of the events
         var t = dbManager.allEvents.addOnCompleteListener { task ->
             if (task.isSuccessful()) {
@@ -66,6 +84,31 @@ class MainActivityVM( ct : Context) : BaseObservable() {
 
 
     }
+
+    fun filterNew(){
+        var dbInstance = FirebaseFirestore.getInstance()
+        var dbManager = DatabaseManager(dbInstance)
+        val events = arrayListOf<String>()
+
+        var t = dbManager.allEvents.addOnCompleteListener { task ->
+            if (task.isSuccessful()) {
+                var temp = task.getResult()
+                temp!!.forEach {
+                    // foreach document we get from allEvents convert it to an Event
+                    val t = it.toObject(Event::class.java)
+                    if (t.price <= 0){
+                        events.add(t.toString()) // then put the string rep of the object in our events
+                        EventsListAdapter.notifyChange()
+                    }
+                }
+
+            }
+        }
+
+
+        EventsListAdapter.set(ArrayAdapter(parentContest, android.R.layout.simple_list_item_1, events))
+    }
+
 
 
 
