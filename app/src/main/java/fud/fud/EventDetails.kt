@@ -10,6 +10,7 @@ import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.net.Uri
 import android.widget.Button
+import fud.fud.Models.Event
 import fud.fud.databinding.ActivityEventDetailsBinding
 
 import kotlinx.android.synthetic.main.activity_event_details.*
@@ -17,17 +18,18 @@ import kotlinx.android.synthetic.main.activity_event_details.*
 class EventDetails : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        val location = "geo:42.7302,-73.6788"
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_event_details)
-
+        //val event = getIntent().getSerializableExtra("Event")
 
         val binding: ActivityEventDetailsBinding = DataBindingUtil.setContentView(this, R.layout.activity_event_details)
         binding.eventDetailsVM = EventDetailsVM()
 
         val button: Button = findViewById<Button>(R.id.RouteButton)
         button.setOnClickListener({
-            startActivity(Intent(this, Routing::class.java))
+            val intent = Intent(this,Routing::class.java)
+            //intent.putExtra("Event",event)
+            startActivity(intent)
         })
 
         val button2: Button = findViewById<Button>(R.id.FakeButton)
