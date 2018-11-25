@@ -13,8 +13,8 @@ public class Routing extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_routing2);
-        //String location = "geo:42.7302,-73.6788";
-        String location = "geo:0,0?q=rensselaer+polytechnic_institute";
+        String location = "geo:0,0?q=42.7302,-73.6788(Event)";
+        //String location = "geo:0,0?q=rensselaer+polytechnic_institute";
         Uri gmmIntentUri = Uri.parse(location);
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
         mapIntent.setPackage("com.google.android.apps.maps");
