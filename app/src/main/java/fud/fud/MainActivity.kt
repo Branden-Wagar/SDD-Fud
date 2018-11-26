@@ -4,10 +4,8 @@ import android.app.Activity
 import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.ListView
-import android.widget.Spinner
+import android.view.View
+import android.widget.*
 import com.google.firebase.firestore.FirebaseFirestore
 import fud.fud.Database.DatabaseManager
 import fud.fud.Models.Event
@@ -44,6 +42,10 @@ class MainActivity : Activity() {
             adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             tagsSpinner.adapter = adapter1
         }
+
+
+
+
 
     }
     private fun populateList(){

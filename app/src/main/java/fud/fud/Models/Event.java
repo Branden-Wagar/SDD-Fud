@@ -1,10 +1,12 @@
 package fud.fud.Models;
 
+
 import android.support.annotation.NonNull;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Event {
+public class Event implements Serializable {
     private String eventName;
     private Date date;
     private String address;
@@ -60,12 +62,12 @@ public class Event {
         String NL = System.getProperty("line.separator");
 
         //result.append(this.getClass().getName() + " Object {" + NL);
-        result.append(" Event Name: " + eventName + NL);
+        result.append(" Name: " + eventName + NL);
         //result.append(" Date: " + date.getTime() + NL);
         //result.append(" Address: " + address + NL );
         //result.append(" Description: " + description + NL);
-        result.append(" Cuisine Type: " + cuisineType + NL );
-        result.append(" Distance to user: " + distanceToUser + NL);
+        result.append(" Type: " + cuisineType + NL );
+        result.append(" Distance: " + distanceToUser + NL);
         result.append(" Price: " + price + NL);
         //result.append("}");
 

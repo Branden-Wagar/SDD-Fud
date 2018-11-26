@@ -7,14 +7,17 @@ import android.app.Activity;
 import android.view.View;
 import android.widget.Button;
 
+import fud.fud.Models.Event;
+
 public class Routing extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_routing2);
-        //String location = "geo:42.7302,-73.6788";
-        String location = "geo:0,0?q=rensselaer+polytechnic_institute";
+        String location = "geo:0,0?q=42.7302,-73.6788(Event)";
+        //Event event=(Event)getIntent().getSerializableExtra("Event");
+        //String location = "geo:0,0?q="+event.getAddress()+"("+event.getName()+")";
         Uri gmmIntentUri = Uri.parse(location);
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
         mapIntent.setPackage("com.google.android.apps.maps");
