@@ -13,45 +13,53 @@ import com.google.android.gms.tasks.TaskCompletionSource
 import com.google.firebase.firestore.FirebaseFirestore
 import fud.fud.Database.DatabaseManager
 import fud.fud.Models.Event
+import kotlin.math.roundToInt
 
 class MainActivityVM( ct : Context) : BaseObservable() {
 
-    private var _filter4 = "New Events"
-    var Filter1 = ObservableField<String>("Free Only")
+    var NewEventFilter = ObservableField<String>("New Events")
+    var FreeFoodFilter = ObservableField<String>("Free Only")
     var EventsListAdapter = ObservableField<ArrayAdapter<String>>()
     var FoodTypeFilters = ObservableField<ArrayAdapter<String>>(ArrayAdapter<String>(ct, android.R.layout.simple_list_item_1, ct.resources.getStringArray(R.array.food_tags)))
     var parentContest = ct
 
-    private var _NewEventOnly = false
+    private var maxEventPrice : Double = 0.0
+
+    private var _freeFoodOnly = false
 
     @Bindable
-    fun getNewEventOnly() : Boolean{
-        return _NewEventOnly
+    fun getFreeEventOnly() : Boolean{
+        return _freeFoodOnly
     }
-    fun setNewEventOnly(input : Boolean){
-        if (input != _NewEventOnly){
-            _NewEventOnly = input
+    fun setFreeEventOnly(input : Boolean){
+        if (input != _freeFoodOnly){
+            _freeFoodOnly = input
             if (input){
-                filterNew()
+                filterPrice(0.0)
             }
             else{
                 UpdateEventsList()
             }
         }
-        notifyPropertyChanged(BR.newEventOnly)
+        notifyPropertyChanged(BR.freeEventOnly)
     }
 
 
+    private var _priceLimit : Int = 0
     @Bindable
-    fun getFilterFour() : String{
-        return _filter4
+    fun getPriceLimit() : Int{
+        return _priceLimit
     }
 
-    fun setFilterFour(value: String) {
-        if (value != _filter4){
-            _filter4 = value
+    fun setPriceLimit(value: Int) {
+        if (value != _priceLimit){
+            _priceLimit = value
+            // our slider acts as a percentage value of all prices
+            var x = _priceLimit / 100.0
+            var k = x * maxEventPrice
+            filterPrice(k)
         }
-        notifyPropertyChanged(BR.filterFour)
+        notifyPropertyChanged(BR.priceLimit)
     }
 
     fun onclickCreateEvent(){
@@ -63,15 +71,18 @@ class MainActivityVM( ct : Context) : BaseObservable() {
         var dbInstance = FirebaseFirestore.getInstance()
         var dbManager = DatabaseManager(dbInstance)
         //set up arrayLists for holding the information for the ListView
-
+        maxEventPrice = 0.0
         val events = arrayListOf<String>()
         //get the information for each of the events
-        var t = dbManager.allEvents.addOnCompleteListener { task ->
+        dbManager.allEvents.addOnCompleteListener { task ->
             if (task.isSuccessful()) {
                 var temp = task.getResult()
                 temp!!.forEach {
                     // foreach document we get from allEvents convert it to an Event
                     val t = it.toObject(Event::class.java)
+                    if (t.price > maxEventPrice){
+                        maxEventPrice = t.price // this ensures the last value will be displayed
+                    }
                     events.add(t.toString()) // then put the string rep of the object in our events
                     EventsListAdapter.notifyChange()
                 }
@@ -85,18 +96,18 @@ class MainActivityVM( ct : Context) : BaseObservable() {
 
     }
 
-    fun filterNew(){
+    private fun filterPrice(lim : Double){
         var dbInstance = FirebaseFirestore.getInstance()
         var dbManager = DatabaseManager(dbInstance)
         val events = arrayListOf<String>()
 
-        var t = dbManager.allEvents.addOnCompleteListener { task ->
+        dbManager.allEvents.addOnCompleteListener { task ->
             if (task.isSuccessful()) {
                 var temp = task.getResult()
                 temp!!.forEach {
                     // foreach document we get from allEvents convert it to an Event
                     val t = it.toObject(Event::class.java)
-                    if (t.price <= 0){
+                    if (t.price <= lim){
                         events.add(t.toString()) // then put the string rep of the object in our events
                         EventsListAdapter.notifyChange()
                     }
