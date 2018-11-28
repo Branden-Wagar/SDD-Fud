@@ -24,8 +24,8 @@ class MainActivityVM( ct : Context) : BaseObservable() {
     var EventsListAdapter = ObservableField<ArrayAdapter<String>>()
     var FoodTypeFilters = ObservableField<ArrayAdapter<String>>(ArrayAdapter<String>(ct, android.R.layout.simple_list_item_1, ct.resources.getStringArray(R.array.food_tags)))
     var parentContest = ct
-    val eventString = arrayListOf<String>()
-    val events = arrayListOf<Event>()
+    var eventString = arrayListOf<String>()
+    var events = arrayListOf<Event>()
 
     private var maxEventPrice : Double = 0.0
 
@@ -85,7 +85,11 @@ class MainActivityVM( ct : Context) : BaseObservable() {
 
         events.clear()
         eventString.clear()
+        eventString = ArrayList<String>()
+        var eventsL = ArrayList<Event>()
+        var localEvents = ArrayList<String>()
         maxEventPrice = 0.0
+        //val eventString = arrayListOf<String>()
         //get the information for each of the events
         dbManager.allEvents.addOnCompleteListener { task ->
             if (task.isSuccessful()) {
@@ -93,49 +97,52 @@ class MainActivityVM( ct : Context) : BaseObservable() {
                 temp!!.forEach {
                     // foreach document we get from allEvents convert it to an Event
                     val t = it.toObject(Event::class.java)
-                    events.add(t)
-                    eventString.add(t.toString()) // then put the string rep of the object in our events
+                    eventsL.add(t)
+                    //eventString.add(t.toString()) // then put the string rep of the object in our events
                     if (t.price > maxEventPrice){
-                        maxEventPrice = t.price // this ensures the last value will be displayed
+                        maxEventPrice = t.price
                     }
-                    //events.add(t.toString()) // then put the string rep of the object in our events
+                    localEvents.add(t.toString()) // then put the string rep of the object in our events
                     EventsListAdapter.notifyChange()
                 }
 
             }
         }
-
-        EventsListAdapter.set(ArrayAdapter(parentContest, android.R.layout.simple_list_item_1, eventString))
+        eventString = localEvents
+        events = eventsL
+        EventsListAdapter.set(ArrayAdapter(parentContest, android.R.layout.simple_list_item_1, localEvents))
 
 
 
     }
 
-    private fun filterPrice(lim : Double){
+    private fun filterPrice(lim : Double) {
         var dbInstance = FirebaseFirestore.getInstance()
         var dbManager = DatabaseManager(dbInstance)
         events.clear()
-        eventString.clear()
-
+        //eventString.clear()
+        var eventLocal = ArrayList<Event>()
+        eventString = ArrayList<String>()
+        var eventStringLocal = ArrayList<String>()
         dbManager.allEvents.addOnCompleteListener { task ->
             if (task.isSuccessful()) {
                 var temp = task.getResult()
                 temp!!.forEach {
                     // foreach document we get from allEvents convert it to an Event
                     val t = it.toObject(Event::class.java)
-
-                    if (t.price <= lim){
-                        events.add(t)
-                        eventString.add(t.toString()) // then put the string rep of the object in our events
+                    //eventString.add(t.toString()) // then put the string rep of the object in our events
+                    if (t.price <= lim) {
+                        eventLocal.add(t)
+                        eventStringLocal.add(t.toString()) // then put the string rep of the object in our events
                         EventsListAdapter.notifyChange()
                     }
+
                 }
-
             }
+            events = eventLocal
+            eventString = eventStringLocal
+            EventsListAdapter.set(ArrayAdapter(parentContest, android.R.layout.simple_list_item_1, eventStringLocal))
         }
-
-
-        EventsListAdapter.set(ArrayAdapter(parentContest, android.R.layout.simple_list_item_1, eventString))
     }
 
 
