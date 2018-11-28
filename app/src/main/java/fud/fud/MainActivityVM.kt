@@ -121,6 +121,7 @@ class MainActivityVM( ct : Context) : BaseObservable() {
         var dbManager = DatabaseManager(dbInstance)
         events.clear()
         //eventString.clear()
+        var eventLocal = ArrayList<Event>()
         eventString = ArrayList<String>()
         var eventStringLocal = ArrayList<String>()
         dbManager.allEvents.addOnCompleteListener { task ->
@@ -131,14 +132,14 @@ class MainActivityVM( ct : Context) : BaseObservable() {
                     val t = it.toObject(Event::class.java)
                     //eventString.add(t.toString()) // then put the string rep of the object in our events
                     if (t.price <= lim) {
-                        events.add(t)
+                        eventLocal.add(t)
                         eventStringLocal.add(t.toString()) // then put the string rep of the object in our events
                         EventsListAdapter.notifyChange()
                     }
 
                 }
             }
-
+            events = eventLocal
             eventString = eventStringLocal
             EventsListAdapter.set(ArrayAdapter(parentContest, android.R.layout.simple_list_item_1, eventStringLocal))
         }
