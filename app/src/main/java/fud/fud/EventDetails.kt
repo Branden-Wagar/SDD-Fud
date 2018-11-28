@@ -20,10 +20,10 @@ class EventDetails : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_event_details)
-        val event = getIntent().getSerializableExtra("Event")
+        val event = getIntent().getSerializableExtra("Event") as Event
 
         val binding: ActivityEventDetailsBinding = DataBindingUtil.setContentView(this, R.layout.activity_event_details)
-        binding.eventDetailsVM = EventDetailsVM()
+        binding.eventDetailsVM = EventDetailsVM(event)
 
         val button: Button = findViewById<Button>(R.id.RouteButton)
         button.setOnClickListener({

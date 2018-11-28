@@ -31,7 +31,7 @@ class MainActivity : Activity() {
         binding.mainvm = activityVM
         val button: Button = findViewById(R.id.CreateEventButton)
         button.setOnClickListener {
-            startActivity(Intent(this, EventDetails::class.java))
+            startActivity(Intent(this, CreateEvent::class.java))
         }
 
         populateList()

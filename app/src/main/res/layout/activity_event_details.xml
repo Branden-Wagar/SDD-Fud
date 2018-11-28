@@ -26,7 +26,7 @@
         android:layout_marginBottom="68dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Event Name"
+        android:text="@={eventDetailsVM.filter1}"
         app:layout_constraintBottom_toTopOf="@+id/DescriptionText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
