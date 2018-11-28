@@ -13,9 +13,14 @@ class EventDetailsVM (event:Event): ViewModel() {
 
 
     var eventName = MutableLiveData<String>()
-    val hold = event.getEventName()
-    var filter1 = ObservableField<String>(hold)
-    var filter4 = ObservableField<String>("Location")
+    val name = event.getEventName()
+    val distance = event.getEventName()
+    val discription = event.getDescription()
+    val location = event.getAddress()
+    var filter1 = ObservableField<String>(name)
+    var filter2= ObservableField<String>("NEED THIS")
+    var filter3=ObservableField<String>(discription)
+    var filter4 = ObservableField<String>(location)
 
     fun eventDetailsClick(){
         if (eventName.value == null){

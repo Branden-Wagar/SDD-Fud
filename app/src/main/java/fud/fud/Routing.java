@@ -17,7 +17,7 @@ public class Routing extends Activity {
         setContentView(R.layout.activity_routing2);
         Event event=(Event)getIntent().getSerializableExtra("Event");
         String location = "geo:0,0?q=42.7302,-73.6788("+event.getEventName()+")";
-        //String location = "geo:0,0?q="+event.getAddress()+"("+event.getName()+")";
+        //String location = "geo:0,0?q="+event.getAddress()+"("+event.getEventName()+")";
         Uri gmmIntentUri = Uri.parse(location);
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
         mapIntent.setPackage("com.google.android.apps.maps");
