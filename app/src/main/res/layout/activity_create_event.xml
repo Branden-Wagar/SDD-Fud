@@ -12,12 +12,10 @@
         <import type="fud.fud.StringValidationRules" />
     </data>
 
-
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".CreateEvent">
-
 
         <TextView
             android:id="@+id/FudTitle"
@@ -54,7 +52,8 @@
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/FudTitle"
-            app:layout_constraintVertical_chainStyle="spread" />
+            app:layout_constraintVertical_chainStyle="spread"
+            app:error="@{createEventVM.eventNameError}"/>
 
         <Spinner
             android:id="@+id/FoodTypeSpinner"
@@ -85,7 +84,8 @@
             android:text="@={createEventVM.maxPrice}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/FoodTypeSpinner" />
+            app:layout_constraintTop_toBottomOf="@+id/FoodTypeSpinner"
+            app:error="@{createEventVM.maxPriceError}"/>
 
         <EditText
             android:id="@+id/EndTimeBox"
@@ -101,7 +101,8 @@
             app:layout_constraintBottom_toTopOf="@+id/EventDetailsBox"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/PriceBox" />
+            app:layout_constraintTop_toBottomOf="@+id/PriceBox"
+            app:error="@{createEventVM.endTimeError}"/>
 
         <EditText
             android:id="@+id/EventDetailsBox"
@@ -119,8 +120,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/EndTimeBox" />
-
+            app:layout_constraintTop_toBottomOf="@+id/EndTimeBox"
+            app:error="@{createEventVM.eventDescError}"/>
 
         <Button
             android:id="@+id/CreateEventButton"

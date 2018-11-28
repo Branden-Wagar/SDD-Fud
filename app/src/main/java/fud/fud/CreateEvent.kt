@@ -26,12 +26,5 @@ class CreateEvent : Activity() {
         val binding: ActivityCreateEventBinding = DataBindingUtil.setContentView(this, R.layout.activity_create_event)
         binding.createEventVM = CreateEventVM(t, "Chinese", adapter)
 
-        val button: Button = findViewById(R.id.CreateEventButton)
-        button.setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
-        }
-
-
-
     }
 }
