@@ -1,6 +1,7 @@
 package fud.fud
 
 import android.arch.lifecycle.ViewModel
+import android.content.Context
 import android.content.Intent
 import android.databinding.ObservableField
 import fud.fud.Models.Event
@@ -51,6 +52,7 @@ class CreateEventVM(options: List<String>, curr: String, adapter: ArrayAdapter<S
         val db = DatabaseManager(FirebaseFirestore.getInstance())
         db.add(toSubmit)
         //need to add return to main activity here
+
     }
 
     fun validatePrice() : Boolean{

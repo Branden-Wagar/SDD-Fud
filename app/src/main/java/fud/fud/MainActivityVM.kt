@@ -21,6 +21,8 @@ class MainActivityVM( ct : Context) : BaseObservable() {
     var EventsListAdapter = ObservableField<ArrayAdapter<String>>()
     var FoodTypeFilters = ObservableField<ArrayAdapter<String>>(ArrayAdapter<String>(ct, android.R.layout.simple_list_item_1, ct.resources.getStringArray(R.array.food_tags)))
     var parentContest = ct
+    val eventString = arrayListOf<String>()
+    val events = arrayListOf<Event>()
 
     private var _NewEventOnly = false
 
@@ -64,7 +66,8 @@ class MainActivityVM( ct : Context) : BaseObservable() {
         var dbManager = DatabaseManager(dbInstance)
         //set up arrayLists for holding the information for the ListView
 
-        val events = arrayListOf<String>()
+        events.clear()
+        eventString.clear()
         //get the information for each of the events
         var t = dbManager.allEvents.addOnCompleteListener { task ->
             if (task.isSuccessful()) {
@@ -72,14 +75,15 @@ class MainActivityVM( ct : Context) : BaseObservable() {
                 temp!!.forEach {
                     // foreach document we get from allEvents convert it to an Event
                     val t = it.toObject(Event::class.java)
-                    events.add(t.toString()) // then put the string rep of the object in our events
+                    events.add(t)
+                    eventString.add(t.toString()) // then put the string rep of the object in our events
                     EventsListAdapter.notifyChange()
                 }
 
             }
         }
 
-        EventsListAdapter.set(ArrayAdapter(parentContest, android.R.layout.simple_list_item_1, events))
+        EventsListAdapter.set(ArrayAdapter(parentContest, android.R.layout.simple_list_item_1, eventString))
 
 
 
@@ -88,7 +92,8 @@ class MainActivityVM( ct : Context) : BaseObservable() {
     fun filterNew(){
         var dbInstance = FirebaseFirestore.getInstance()
         var dbManager = DatabaseManager(dbInstance)
-        val events = arrayListOf<String>()
+        events.clear()
+        eventString.clear()
 
         var t = dbManager.allEvents.addOnCompleteListener { task ->
             if (task.isSuccessful()) {
@@ -97,7 +102,8 @@ class MainActivityVM( ct : Context) : BaseObservable() {
                     // foreach document we get from allEvents convert it to an Event
                     val t = it.toObject(Event::class.java)
                     if (t.price <= 0){
-                        events.add(t.toString()) // then put the string rep of the object in our events
+                        events.add(t)
+                        eventString.add(t.toString()) // then put the string rep of the object in our events
                         EventsListAdapter.notifyChange()
                     }
                 }
@@ -106,8 +112,10 @@ class MainActivityVM( ct : Context) : BaseObservable() {
         }
 
 
-        EventsListAdapter.set(ArrayAdapter(parentContest, android.R.layout.simple_list_item_1, events))
+        EventsListAdapter.set(ArrayAdapter(parentContest, android.R.layout.simple_list_item_1, eventString))
     }
+
+    
 
 
 

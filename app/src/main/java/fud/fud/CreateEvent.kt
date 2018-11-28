@@ -1,9 +1,11 @@
 package fud.fud
 
 import android.app.Activity
+import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.Spinner
 import fud.fud.databinding.ActivityCreateEventBinding
 
@@ -23,6 +25,11 @@ class CreateEvent : Activity() {
 
         val binding: ActivityCreateEventBinding = DataBindingUtil.setContentView(this, R.layout.activity_create_event)
         binding.createEventVM = CreateEventVM(t, "Chinese", adapter)
+
+        val button: Button = findViewById(R.id.CreateEventButton)
+        button.setOnClickListener {
+            startActivity(Intent(this, MainActivity::class.java))
+        }
 
 
 

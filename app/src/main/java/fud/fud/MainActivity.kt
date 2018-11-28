@@ -23,8 +23,8 @@ class MainActivity : Activity() {
         setContentView(R.layout.activity_main)
         // databinding to MainActivityVM setup
 
-        var events = ArrayList<String>()
-        var adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, events)
+        //var events = ArrayList<String>()
+        //var adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, events)
 
         val binding: ActivityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         activityVM = MainActivityVM(this)
@@ -42,8 +42,7 @@ class MainActivity : Activity() {
             adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             tagsSpinner.adapter = adapter1
         }
-
-
+        
 
 
 
