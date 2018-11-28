@@ -43,7 +43,9 @@ class MainActivity : Activity() {
             tagsSpinner.adapter = adapter1
         }
         
-
+        lv.setOnItemClickListener {adapterView, view, position: Int, id: Long ->
+            activityVM.getEvent(this,position)
+        }
 
 
     }

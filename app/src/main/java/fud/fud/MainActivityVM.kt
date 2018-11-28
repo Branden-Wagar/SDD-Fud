@@ -2,10 +2,12 @@ package fud.fud
 
 import android.arch.lifecycle.LiveData
 import android.content.Context
+import android.content.Intent
 import android.databinding.BaseObservable
 import android.databinding.Bindable
 import android.databinding.Observable
 import android.databinding.ObservableField
+import android.support.v4.content.ContextCompat.startActivity
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import com.google.android.gms.tasks.Task
@@ -53,6 +55,13 @@ class MainActivityVM( ct : Context) : BaseObservable() {
         return _priceLimit
     }
 
+    fun getEvent( ct:Context,position: Int){
+        val event = events.get(position)
+        val intent = Intent(ct, EventDetails::class.java)
+        intent.putExtra("Event",event)
+        ct.startActivity(intent)
+    }
+
     fun setPriceLimit(value: Int) {
         if (value != _priceLimit){
             _priceLimit = value
@@ -77,7 +86,6 @@ class MainActivityVM( ct : Context) : BaseObservable() {
         events.clear()
         eventString.clear()
         maxEventPrice = 0.0
-        val events = arrayListOf<String>()
         //get the information for each of the events
         dbManager.allEvents.addOnCompleteListener { task ->
             if (task.isSuccessful()) {
@@ -90,7 +98,7 @@ class MainActivityVM( ct : Context) : BaseObservable() {
                     if (t.price > maxEventPrice){
                         maxEventPrice = t.price // this ensures the last value will be displayed
                     }
-                    events.add(t.toString()) // then put the string rep of the object in our events
+                    //events.add(t.toString()) // then put the string rep of the object in our events
                     EventsListAdapter.notifyChange()
                 }
 
@@ -115,11 +123,10 @@ class MainActivityVM( ct : Context) : BaseObservable() {
                 temp!!.forEach {
                     // foreach document we get from allEvents convert it to an Event
                     val t = it.toObject(Event::class.java)
-                    if (t.price <= 0){
+
+                    if (t.price <= lim){
                         events.add(t)
                         eventString.add(t.toString()) // then put the string rep of the object in our events
-                    if (t.price <= lim){
-                        events.add(t.toString()) // then put the string rep of the object in our events
                         EventsListAdapter.notifyChange()
                     }
                 }
