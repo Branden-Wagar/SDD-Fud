@@ -1,21 +1,20 @@
-package fud.fud.Database;
+package fud.fud.Database
 
-import android.support.annotation.NonNull;
-import android.util.Log;
+import android.util.Log
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
+import com.google.android.gms.tasks.OnFailureListener
+import com.google.android.gms.tasks.OnSuccessListener
+import com.google.android.gms.tasks.Task
+import com.google.firebase.firestore.CollectionReference
 
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.QuerySnapshot
 
-import java.util.Date;
+import java.util.Date
 
-import fud.fud.Models.Event;
+import fud.fud.Models.Event
 
-import static android.content.ContentValues.TAG;
+import android.content.ContentValues.TAG
 
 /**
  * Implement CRUD operations for firestore database.
@@ -24,18 +23,38 @@ import static android.content.ContentValues.TAG;
  *
  * TODO: Make this a singleton since no parallel operation
  */
-public class DatabaseManager implements IEventQuery {
-
-    private FirebaseFirestore db;
-    private static CollectionReference eventCollection;
+class DatabaseManager
+/**
+ * Initialize the database instance.
+ *
+ */
+(private val db: FirebaseFirestore) : IEventQuery {
 
     /**
-     * Initialize the database instance.
-     *
+     * Get all events from the event collection.
+     * @return A QuerySnapShot of all events within the event collection.
      */
-    public DatabaseManager(FirebaseFirestore db) {
-        this.db = db;
-        eventCollection = db.collection(KeyStore.EVENT_TABLE_NAME);
+    override val allEvents: Task<QuerySnapshot>
+        get() = getAll(KeyStore.EVENT_TABLE_NAME)
+
+    /**
+     * Get all events that are occurring today.
+     * @return A QuerySnapShot of all events that are occurring on the day of the query.
+     */
+    override val todayEvents: Task<QuerySnapshot>
+        get() = eventCollection
+                .whereEqualTo(KeyStore.EVENT_DATE!!, java.time.LocalDate.now())
+                .get()
+
+    /*
+        TODO: Implement this later when decided on uniqueness
+        TODO: qualifier for events
+     */
+//    override val eventObect: Task<QuerySnapshot>
+//        get() = null
+
+    init {
+        eventCollection = db.collection(KeyStore.EVENT_TABLE_NAME)
     }
 
     /**
@@ -44,8 +63,8 @@ public class DatabaseManager implements IEventQuery {
      *
      * @param e - Event to add to the database
      */
-    public void add(Event e) {
-        this.add(e, KeyStore.EVENT_TABLE_NAME, e.getEventName());
+    fun add(e: Event) {
+        this.add(e, KeyStore.EVENT_TABLE_NAME, e.eventName)
     }
 
     /**
@@ -53,23 +72,13 @@ public class DatabaseManager implements IEventQuery {
      * @param obj - Object to add to the collection
      * @param collection - Name of collection object is being added to.
      * @param <T> - Generic type handling
-     */
-    private <T> void add(T obj, String collection, String document) {
+    </T> */
+    private fun <T> add(obj: T, collection: String, document: String?) {
         db.collection(collection)
-                .document(document)
+                .document(document!!)
                 .set(obj)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.d(TAG, "DocumentSnapshot successfully written!");
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error writing document", e);
-                    }
-                });
+                .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully written!") }
+                .addOnFailureListener { e -> Log.w(TAG, "Error writing document", e) }
     }
 
     /**
@@ -77,8 +86,8 @@ public class DatabaseManager implements IEventQuery {
      * @param collectionName - Name of the collection in which the objects are stored.
      * @return a list of all of the objects in the collection
      */
-    private Task<QuerySnapshot> getAll(String collectionName) {
-        return db.collection(collectionName).get();
+    private fun getAll(collectionName: String): Task<QuerySnapshot> {
+        return db.collection(collectionName).get()
     }
 
     /**
@@ -87,11 +96,10 @@ public class DatabaseManager implements IEventQuery {
      * @param withInMaximumDistance - Maximum distance of event from the user.
      * @return A QuerySnapShot of all of the events within this distance.
      */
-    @Override
-    public Task<QuerySnapshot> getLocalEvents(double distanceToUser, double withInMaximumDistance) {
+    override fun getLocalEvents(distanceToUser: Double, withInMaximumDistance: Double): Task<QuerySnapshot> {
         return eventCollection
                 .whereGreaterThan(KeyStore.EVENT_DISTANCE, withInMaximumDistance)
-                .get();
+                .get()
     }
 
     /**
@@ -100,12 +108,11 @@ public class DatabaseManager implements IEventQuery {
      * @return - A QuerySnapShot of all events with the specified
      * cuisine type.
      */
-    @Override
-    public Task<QuerySnapshot> getCuisineFilteredFoodEvents(String cuisineType) {
+    override fun getCuisineFilteredFoodEvents(cuisineType: String): Task<QuerySnapshot> {
 
         return eventCollection
-            .whereEqualTo(KeyStore.EVENT_CUISINE_TYPE, cuisineType)
-            .get();
+                .whereEqualTo(KeyStore.EVENT_CUISINE_TYPE, cuisineType)
+                .get()
     }
 
     /**
@@ -113,44 +120,23 @@ public class DatabaseManager implements IEventQuery {
      * @param maximumPrice - Maximum price desired by user.
      * @return - A QuerySnapShot of all events under the specified price.
      */
-    @Override
-    public Task<QuerySnapshot> getPriceFilteredEvents(double maximumPrice) {
+    override fun getPriceFilteredEvents(maximumPrice: Double): Task<QuerySnapshot> {
         return eventCollection
                 .whereLessThanOrEqualTo(KeyStore.EVENT_PRICE, maximumPrice)
-                .get();
+                .get()
     }
+
     /**
      * Get all events up to a certain price.
      * @param minimumPrice - Minimum price desired by user.
      * @param maximumPrice - Maximum price desired by user.
      * @return - A QuerySnapShot of all events within the specified price range.
      */
-    @Override
-    public Task<QuerySnapshot> getPriceFilteredEvents(double minimumPrice, double maximumPrice) {
+    override fun getPriceFilteredEvents(minimumPrice: Double, maximumPrice: Double): Task<QuerySnapshot> {
         return eventCollection
                 .whereLessThanOrEqualTo(KeyStore.EVENT_PRICE, maximumPrice)
                 .whereGreaterThanOrEqualTo(KeyStore.EVENT_PRICE, minimumPrice)
-                .get();
-    }
-
-    /**
-     * Get all events from the event collection.
-     * @return A QuerySnapShot of all events within the event collection.
-     */
-    @Override
-    public Task<QuerySnapshot> getAllEvents() {
-        return getAll(KeyStore.EVENT_TABLE_NAME);
-    }
-
-    /**
-     * Get all events that are occurring today.
-     * @return A QuerySnapShot of all events that are occurring on the day of the query.
-     */
-    @Override
-    public Task<QuerySnapshot> getTodayEvents() {
-        return eventCollection
-                .whereEqualTo(KeyStore.EVENT_DATE, java.time.LocalDate.now())
-                .get();
+                .get()
     }
 
     /**
@@ -158,19 +144,13 @@ public class DatabaseManager implements IEventQuery {
      * @param date - Date specified by user
      * @return A QuerySnapShot of all events on the date specified.
      */
-    @Override
-    public Task<QuerySnapshot> getDateSpecificEvents(Date date) {
+    override fun getDateSpecificEvents(date: Date): Task<QuerySnapshot> {
         return eventCollection
-                .whereEqualTo(KeyStore.EVENT_DATE, date)
-                .get();
+                .whereEqualTo(KeyStore.EVENT_DATE!!, date)
+                .get()
     }
 
-    /*
-        TODO: Implement this later when decided on uniqueness
-        TODO: qualifier for events
-     */
-    @Override
-    public Task<QuerySnapshot> getEventObect() {
-        return null;
+    companion object {
+        private var eventCollection: CollectionReference
     }
 }
