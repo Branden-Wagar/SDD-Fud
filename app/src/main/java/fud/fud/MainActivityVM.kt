@@ -124,9 +124,10 @@ class MainActivityVM( ct : Context, foodTagOptions : List<String>) : BaseObserva
     }
 
 
-
+    //get the event clicked on from the ListView
     fun getEvent( ct:Context,position: Int){
         val event = events.get(position)
+        //start the eventDetails activity and pass on the event
         val intent = Intent(ct, EventDetails::class.java)
         intent.putExtra("Event",event)
         ct.startActivity(intent)
