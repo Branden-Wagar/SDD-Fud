@@ -12,33 +12,16 @@ import fud.fud.Models.Event
 class EventDetailsVM (event:Event): ViewModel() {
 
 
-    var eventName = MutableLiveData<String>()
     val name = event.getEventName()
-    val distance = event.getEventName()
+    val distance = event.getDistanceToUser()
     val discription = event.getDescription()
-    val location = event.getAddress()
     val price = event.getPrice()
     var filter1 = ObservableField<String>(name)
-    var filter2= ObservableField<String>("NEED THIS")
+    var filter2= ObservableField<String>(distance.toString()+" miles")
     var filter3=ObservableField<String>(discription)
-    var filter4 = ObservableField<String>(location)
     var filter5 = ObservableField<String>("$"+price.toString())
 
-    fun eventDetailsClick(){
-        if (eventName.value == null){
-            eventName.setValue("Taco Party!")
-        }
-        else{
-            if (eventName.value == "Taco Party!"){
-                eventName.setValue("PIZZA!")
-            }
-            else{
-                eventName.setValue("Taco Party!")
-            }
-        }
-        filter4 = ObservableField("Hello Kimosabe")
 
-    }
 
 
 

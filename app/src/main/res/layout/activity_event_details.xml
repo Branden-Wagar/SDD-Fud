@@ -12,126 +12,117 @@
     </data>
 
 
-<android.support.constraint.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".EventDetails">
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".EventDetails">
 
-    <EditText
-        android:id="@+id/Price"
-        android:layout_width="109dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="90dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="@={eventDetailsVM.filter5}"
-        app:layout_constraintEnd_toStartOf="@+id/DistanceText"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <EditText
-        android:id="@+id/DistanceText"
-        android:layout_width="121dp"
-        android:layout_height="51dp"
-        android:layout_marginTop="18dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="54dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="@={eventDetailsVM.filter2}"
-        app:layout_constraintBottom_toTopOf="@+id/EventNameText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/EventNameText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="75dp"
-        android:layout_marginTop="116dp"
-        android:layout_marginEnd="94dp"
-        android:ems="10"
-        android:inputType="none"
-        android:text="@={eventDetailsVM.filter1}"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <EditText
+            android:id="@+id/Price"
+            android:layout_width="109dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="44dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="90dp"
+            android:ems="10"
+            android:textSize="20sp"
+            android:inputType="textPersonName"
+            android:text="@={eventDetailsVM.filter5}"
+            app:layout_constraintEnd_toStartOf="@+id/DistanceText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
-    <EditText
-        android:id="@+id/DescriptionText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="75dp"
-        android:layout_marginTop="70dp"
-        android:layout_marginEnd="94dp"
-        android:ems="10"
-        android:hint="No Description Provided"
-        android:inputType="textPersonName"
-        android:text="@={eventDetailsVM.filter3}"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/EventNameText" />
+        <EditText
+            android:id="@+id/DistanceText"
+            android:layout_width="121dp"
+            android:layout_height="51dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="54dp"
+            android:ems="10"
+            android:textSize="20sp"
+            android:inputType="textPersonName"
+            android:text="@={eventDetailsVM.filter2}"
+            app:layout_constraintBottom_toTopOf="@+id/EventNameText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/LocationText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="75dp"
-        android:layout_marginTop="61dp"
-        android:layout_marginEnd="94dp"
-        android:ems="10"
-        android:hint="No Location Provided"
-        android:inputType="textPersonName"
-        android:text="@={eventDetailsVM.filter4}"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/DescriptionText" />
-
-
-    <Button
-        android:id="@+id/VerifyButton"
-        android:layout_width="88dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="63dp"
-        android:layout_marginBottom="16dp"
-        android:text="VERIFY"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/LocationText" />
-
-    <Button
-        android:id="@+id/RouteButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="63dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:text="ROUTE"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/LocationText" />
-
-    <Button
-        android:id="@+id/FakeButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="63dp"
-        android:layout_marginBottom="16dp"
-        android:text="FAKE"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/VerifyButton"
-        app:layout_constraintTop_toBottomOf="@+id/LocationText" />
+        <EditText
+            android:id="@+id/EventNameText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="85dp"
+            android:layout_marginTop="124dp"
+            android:layout_marginEnd="84dp"
+            android:ems="10"
+            android:textSize="20sp"
+            android:inputType="none"
+            android:text="@={eventDetailsVM.filter1}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
+        <EditText
+            android:id="@+id/DescriptionText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="85dp"
+            android:layout_marginTop="62dp"
+            android:layout_marginEnd="84dp"
+            android:ems="10"
+            android:textSize="20sp"
+            android:hint="No Description Provided"
+            android:inputType="textMultiLine"
+            android:text="@={eventDetailsVM.filter3}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/EventNameText" />
+
+        <Button
+            android:id="@+id/VerifyButton"
+            android:layout_width="88dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:text="VERIFY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <Button
+            android:id="@+id/RouteButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="ROUTE"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <Button
+            android:id="@+id/FakeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="44dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="44dp"
+            android:layout_marginBottom="16dp"
+            android:text="FAKE"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/RouteButton"
+            app:layout_constraintHorizontal_bias="0.562"
+            app:layout_constraintStart_toEndOf="@+id/VerifyButton"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
 
 
-</android.support.constraint.ConstraintLayout>
+    </android.support.constraint.ConstraintLayout>
 
 </layout>
