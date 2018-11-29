@@ -50,7 +50,6 @@ class CreateEventVM(options: List<String>, curr: String, adapter: ArrayAdapter<S
             val db = DatabaseManager(FirebaseFirestore.getInstance())
             db.add(toSubmit)
         }
-        //need to add return to main activity here
     }
 
     fun isValid() : Boolean {
