@@ -35,12 +35,15 @@ class MainActivityVM( ct : Context, foodTagOptions : List<String>) : BaseObserva
     var eventString = arrayListOf<String>()
     var events = arrayListOf<Event>()
     var parentContext = ct
+    var foodTagIndex : ObservableField<Int> = ObservableField(0)
 
-    var locManager : LocationManagerLocal = LocationManagerLocal.instance
+    var locManager: LocationManagerLocal = LocationManagerLocal.instance
     val locationManager = parentContext.getSystemService(Activity.LOCATION_SERVICE) as LocationManager
 
     private var _foodTagOptions = foodTagOptions
-    var foodTagIndex : ObservableField<Int> = ObservableField(0)
+    private var maxEventPrice : Double = 0.0
+    private var maxEventDistance : Double = 0.0
+    private var _freeFoodOnly = false
 
 
 
@@ -49,9 +52,7 @@ class MainActivityVM( ct : Context, foodTagOptions : List<String>) : BaseObserva
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5, 5.1.toFloat(), locManager, null)
         }
     }
-    private var maxEventPrice : Double = 0.0
-    private var maxEventDistance : Double = 0.0
-    private var _freeFoodOnly = false
+
 
 
     @Bindable
@@ -136,6 +137,9 @@ class MainActivityVM( ct : Context, foodTagOptions : List<String>) : BaseObserva
     }
 
 
+    /*
+        Updates the event list with all events we can pull from the DB
+     */
     fun UpdateEventsList() {
         var dbInstance = FirebaseFirestore.getInstance()
         var dbManager = DatabaseManager(dbInstance)
@@ -236,79 +240,37 @@ class MainActivityVM( ct : Context, foodTagOptions : List<String>) : BaseObserva
 
 
     /*
-        Calls the DB, and populates events and eventString with only events
-        that fall under lim
+        Populates the events lists with events under the specified price (inclusive)
      */
     private fun filterPrice(lim : Double){
-        var dbInstance = FirebaseFirestore.getInstance()
-        var dbManager = DatabaseManager(dbInstance)
-        events.clear()
-        //eventString.clear()
-        var eventLocal = ArrayList<Event>()
-        eventString = ArrayList<String>()
-        var eventStringLocal = ArrayList<String>()
-        dbManager.allEvents.addOnCompleteListener { task ->
-            if (task.isSuccessful()) {
-                var temp = task.getResult()
-                temp!!.forEach {
-                    // foreach document we get from allEvents convert it to an Event
-                    val t = it.toObject(Event::class.java)
-                    t.distanceToUser = calculateDistance(getCurrLocation(), t.location)
-                    //eventString.add(t.toString()) // then put the string rep of the object in our events
-                    if (t.price <= lim) {
-                        eventLocal.add(t)
-                        eventStringLocal.add(t.toString()) // then put the string rep of the object in our events
-                        EventsListAdapter.notifyChange()
-                    }
-
-                }
-            }
-            events = eventLocal
-            eventString = eventStringLocal
-            EventsListAdapter.set(ArrayAdapter(parentContext, android.R.layout.simple_list_item_1, eventStringLocal))
-        }
-
-
+        filterBy({t -> t.price <= lim})
     }
 
 
     /*
-        Calls the DB, and populates events and eventString with only events that
-        fall within distance lim
+        Populates the events lists with events within the specified distance (inclusive)
      */
     private fun filterDistance(lim : Double){
-        var dbInstance = FirebaseFirestore.getInstance()
-        var dbManager = DatabaseManager(dbInstance)
-        events.clear()
-        //eventString.clear()
-        var eventLocal = ArrayList<Event>()
-        eventString = ArrayList<String>()
-        var eventStringLocal = ArrayList<String>()
-        dbManager.allEvents.addOnCompleteListener { task ->
-            if (task.isSuccessful()) {
-                var temp = task.getResult()
-                temp!!.forEach {
-                    // foreach document we get from allEvents convert it to an Event
-                    val t = it.toObject(Event::class.java)
-                    t.distanceToUser = calculateDistance(getCurrLocation(), t.location)
-                    //eventString.add(t.toString()) // then put the string rep of the object in our events
-                    if (t.distanceToUser <= lim) {
-                        eventLocal.add(t)
-                        eventStringLocal.add(t.toString()) // then put the string rep of the object in our events
-                        EventsListAdapter.notifyChange()
-                    }
-
-                }
-            }
-            events = eventLocal
-            eventString = eventStringLocal
-            EventsListAdapter.set(ArrayAdapter(parentContext, android.R.layout.simple_list_item_1, eventStringLocal))
-        }
+        filterBy({t -> t.distanceToUser <= lim})
     }
 
 
+    /*
+        Populates the events lists with foods that have the selected tag
+     */
     private fun filterTag() {
+        // we need to retrieve the requested foodTag from the UI
         var cuisineType = _foodTagOptions[foodTagIndex.get()!!]
+        filterBy({t -> t.cuisineType == cuisineType})
+    }
+
+
+
+    /*
+        Generic filterBy method accepts a function that takes an Event and returns a boolean.
+        Then populates the eventsLists with only events that satisfy that function
+     */
+    private fun filterBy(comp : (Event) -> Boolean){
         var dbInstance = FirebaseFirestore.getInstance()
         var dbManager = DatabaseManager(dbInstance)
         events.clear()
@@ -324,7 +286,7 @@ class MainActivityVM( ct : Context, foodTagOptions : List<String>) : BaseObserva
                     val t = it.toObject(Event::class.java)
                     t.distanceToUser = calculateDistance(getCurrLocation(), t.location)
                     //eventString.add(t.toString()) // then put the string rep of the object in our events
-                    if (t.cuisineType == cuisineType) {
+                    if (comp(t)) {
                         eventLocal.add(t)
                         eventStringLocal.add(t.toString()) // then put the string rep of the object in our events
                         EventsListAdapter.notifyChange()
