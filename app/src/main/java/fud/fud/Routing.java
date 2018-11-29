@@ -1,6 +1,7 @@
 package fud.fud;
 
 import android.content.Intent;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
@@ -17,7 +18,9 @@ public class Routing extends Activity {
         setContentView(R.layout.activity_routing2);
         Event event=(Event)getIntent().getSerializableExtra("Event");
         String location = "geo:0,0?q=42.7302,-73.6788("+event.getEventName()+")";
-        //String location = "geo:0,0?q="+event.getAddress()+"("+event.getEventName()+")";
+        //Location eventLocation = event.getLocation();
+        //String coordinates = Double.toString(eventLocation.getLatitude())+","+Double.toString(eventLocation.getLongitude());
+        //String location = "geo:0,0?q="+coordinates+"("+event.getEventName()+")";
         Uri gmmIntentUri = Uri.parse(location);
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
         mapIntent.setPackage("com.google.android.apps.maps");
