@@ -91,7 +91,8 @@
                 android:id="@+id/Filter3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@={mainvm.newEventFilter}"
+                android:text="@={mainvm.foodTagFilter}"
+                android:checked="@={mainvm.foodTagOnly}"
                 tools:text="Filter 3" />
 
             <TextView
@@ -105,7 +106,10 @@
             <SeekBar
                 android:id="@+id/DistanceSeekBar"
                 android:layout_width="match_parent"
-                android:layout_height="40dp" />
+                android:layout_height="40dp"
+                android:min="0"
+                android:max="100"
+                android:progress="@={mainvm.distanceLimit}"/>
 
 
             <TextView
@@ -129,7 +133,8 @@
                 android:id="@+id/FoodTagsSpinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:adapter="@{mainvm.foodTypeFilters}"/>
+                android:adapter="@{mainvm.foodTypeFilters}"
+                android:selectedItemPosition="@={mainvm.foodTagIndex}"/>
         </LinearLayout>
 
 
