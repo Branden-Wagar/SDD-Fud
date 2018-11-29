@@ -17,10 +17,12 @@ class EventDetailsVM (event:Event): ViewModel() {
     val distance = event.getEventName()
     val discription = event.getDescription()
     val location = event.getAddress()
+    val price = event.getPrice()
     var filter1 = ObservableField<String>(name)
     var filter2= ObservableField<String>("NEED THIS")
     var filter3=ObservableField<String>(discription)
     var filter4 = ObservableField<String>(location)
+    var filter5 = ObservableField<String>("$"+price.toString())
 
     fun eventDetailsClick(){
         if (eventName.value == null){
