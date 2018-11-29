@@ -15,7 +15,7 @@ public class Event implements Serializable {
     private String cuisineType;
     private double distanceToUser;
     private double price;
-    private Location location;
+    private EventLocation location;
 
     // TODO: Implement User class eventually
     // private User user;
@@ -31,7 +31,7 @@ public class Event implements Serializable {
     }
 
     public Event(Date date, String address, String description, String cuisineType, String eventName,
-                 double price, Location location) {
+                 double price, EventLocation location) {
         this.date = date;
         this.address = address;
         this.description = description;
@@ -49,7 +49,7 @@ public class Event implements Serializable {
     public String getCuisineType() { return cuisineType; }
     public double getDistanceToUser() { return distanceToUser; }
     public double getPrice() { return price; }
-    public Location getLocation() { return location; }
+    public EventLocation getLocation() { return location; }
 
     public void setEventName(String s) { eventName = s; }
     public void setDate(Date d) { date = d; }
@@ -58,7 +58,7 @@ public class Event implements Serializable {
     public void setCuisineType(String s) { cuisineType = s; }
     public void setDistanceToUser(double d) { distanceToUser = d; }
     public void setPrice(double d) { price = d; }
-    public void setLocation(Location l) {location = l; }
+    public void setLocation(EventLocation l) {location = l; }
 
     @NonNull
     public String toString() {

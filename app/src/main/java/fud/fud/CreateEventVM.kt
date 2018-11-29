@@ -16,6 +16,7 @@ import java.time.Instant
 import android.widget.ArrayAdapter
 import com.google.firebase.firestore.FirebaseFirestore
 import fud.fud.Database.DatabaseManager
+import fud.fud.Models.EventLocation
 import fud.fud.Models.LocationManagerLocal
 
 
@@ -51,6 +52,13 @@ class CreateEventVM(options: List<String>, curr: String, adapter: ArrayAdapter<S
         toSubmit.eventName = EventName.get()
         var index : Int = foodTagIndex.get()!!
         toSubmit.cuisineType = foodTagOptions[index]
+        toSubmit.location = EventLocation()
+        if (Loc != null) {
+            toSubmit.location.latitude = Loc.latitude
+            toSubmit.location.longitude = Loc.longitude
+        }
+
+
 
         val tprice: Double? = MaxPrice.get()!!.toDoubleOrNull()
         if (tprice == null){
