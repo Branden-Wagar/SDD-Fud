@@ -1,16 +1,25 @@
 package fud.fud
 
+import android.Manifest
+import android.app.Activity
 import android.arch.lifecycle.ViewModel
+import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.databinding.ObservableField
+import android.location.Location
+import android.location.LocationManager
+import android.support.v4.content.ContextCompat
 import fud.fud.Models.Event
 import java.sql.Date
 import java.time.Instant
 import android.widget.ArrayAdapter
 import com.google.firebase.firestore.FirebaseFirestore
 import fud.fud.Database.DatabaseManager
+import fud.fud.Models.LocationManagerLocal
 
 
-class CreateEventVM(options: List<String>, curr: String, adapter: ArrayAdapter<String>) : ViewModel() {
+class CreateEventVM(options: List<String>, curr: String, adapter: ArrayAdapter<String>, loc : Location?) : ViewModel() {
 
 
     var EndTime = ObservableField<String>("1:30")
@@ -25,10 +34,15 @@ class CreateEventVM(options: List<String>, curr: String, adapter: ArrayAdapter<S
     var EventDesc = ObservableField<String>("")
     var EventDescError = ObservableField<String>()
 
+    val Loc = loc
+
     val foodTagOptions : List<String> = options
     var foodTag : ObservableField<String> = ObservableField(curr)
     var adapter : ObservableField<ArrayAdapter<String>> = ObservableField(adapter)
     var foodTagIndex : ObservableField<Int> = ObservableField(0)
+
+
+
 
     fun onClickCreateButton(){
         var toSubmit = Event()

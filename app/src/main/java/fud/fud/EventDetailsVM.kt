@@ -9,12 +9,20 @@ import android.databinding.ObservableField
 import fud.fud.Models.Event
 
 
-class EventDetailsVM : ViewModel() {
+class EventDetailsVM (event:Event): ViewModel() {
 
 
     var eventName = MutableLiveData<String>()
-
-    var filter4 = ObservableField<String>("Location")
+    val name = event.getEventName()
+    val distance = event.getEventName()
+    val discription = event.getDescription()
+    val location = event.getAddress()
+    val price = event.getPrice()
+    var filter1 = ObservableField<String>(name)
+    var filter2= ObservableField<String>("NEED THIS")
+    var filter3=ObservableField<String>(discription)
+    var filter4 = ObservableField<String>(location)
+    var filter5 = ObservableField<String>("$"+price.toString())
 
     fun eventDetailsClick(){
         if (eventName.value == null){

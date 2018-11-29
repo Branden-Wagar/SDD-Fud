@@ -18,31 +18,46 @@
     tools:context=".EventDetails">
 
     <EditText
-        android:id="@+id/EventNameText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="68dp"
+        android:id="@+id/Price"
+        android:layout_width="109dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="90dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Event Name"
-        app:layout_constraintBottom_toTopOf="@+id/DescriptionText"
+        android:text="@={eventDetailsVM.filter5}"
+        app:layout_constraintEnd_toStartOf="@+id/DistanceText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <EditText
         android:id="@+id/DistanceText"
-        android:layout_width="84dp"
-        android:layout_height="44dp"
-        android:layout_marginStart="49dp"
+        android:layout_width="121dp"
+        android:layout_height="51dp"
         android:layout_marginTop="18dp"
         android:layout_marginEnd="20dp"
+        android:layout_marginBottom="54dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Distance"
+        android:text="@={eventDetailsVM.filter2}"
+        app:layout_constraintBottom_toTopOf="@+id/EventNameText"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/EventNameText"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/EventNameText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="75dp"
+        android:layout_marginTop="116dp"
+        android:layout_marginEnd="94dp"
+        android:ems="10"
+        android:inputType="none"
+        android:text="@={eventDetailsVM.filter1}"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -51,28 +66,31 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="75dp"
+        android:layout_marginTop="70dp"
         android:layout_marginEnd="94dp"
-        android:layout_marginBottom="79dp"
         android:ems="10"
+        android:hint="No Description Provided"
         android:inputType="textPersonName"
-        android:text="Description"
-        app:layout_constraintBottom_toTopOf="@+id/LocationText"
+        android:text="@={eventDetailsVM.filter3}"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/EventNameText" />
 
     <EditText
         android:id="@+id/LocationText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="75dp"
+        android:layout_marginTop="61dp"
         android:layout_marginEnd="94dp"
-        android:layout_marginBottom="146dp"
         android:ems="10"
+        android:hint="No Location Provided"
         android:inputType="textPersonName"
         android:text="@={eventDetailsVM.filter4}"
-        app:layout_constraintBottom_toTopOf="@+id/RouteButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/DescriptionText" />
 
 
     <Button
@@ -103,12 +121,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="44dp"
-        android:layout_marginTop="145dp"
+        android:layout_marginTop="63dp"
         android:layout_marginBottom="16dp"
         android:text="FAKE"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/VerifyButton"
         app:layout_constraintTop_toBottomOf="@+id/LocationText" />
+
+
 
 
 </android.support.constraint.ConstraintLayout>

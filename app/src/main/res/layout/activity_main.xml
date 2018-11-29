@@ -84,14 +84,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="textStart"
-                android:text="@={mainvm.Filter1}"
-                android:checked="@={mainvm.newEventOnly}"/>
+                android:text="@={mainvm.FreeFoodFilter}"
+                android:checked="@={mainvm.freeEventOnly}"/>
 
             <Switch
                 android:id="@+id/Filter3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@={mainvm.filterFour}"
+                android:text="@={mainvm.newEventFilter}"
                 tools:text="Filter 3" />
 
             <TextView
@@ -119,7 +119,10 @@
             <SeekBar
                 android:id="@+id/PriceLimitSeekBar"
                 android:layout_width="match_parent"
-                android:layout_height="40dp" />
+                android:layout_height="40dp"
+                android:min="0"
+                android:max="100"
+                android:progress="@={mainvm.priceLimit}"/>
 
 
             <Spinner
