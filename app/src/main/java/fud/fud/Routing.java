@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 
 import fud.fud.Models.Event;
+import fud.fud.Models.EventLocation;
 
 public class Routing extends Activity {
 
@@ -17,10 +18,10 @@ public class Routing extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_routing2);
         Event event=(Event)getIntent().getSerializableExtra("Event");
-        String location = "geo:0,0?q=42.7302,-73.6788("+event.getEventName()+")";
-        //Location eventLocation = event.getLocation();
-        //String coordinates = Double.toString(eventLocation.getLatitude())+","+Double.toString(eventLocation.getLongitude());
-        //String location = "geo:0,0?q="+coordinates+"("+event.getEventName()+")";
+        //String location = "geo:0,0?q=42.7302,-73.6788("+event.getEventName()+")";
+        EventLocation eventLocation = event.getLocation();
+        String coordinates = Double.toString(eventLocation.getLatitude())+","+Double.toString(eventLocation.getLongitude());
+        String location = "geo:0,0?q="+coordinates+"("+event.getEventName()+")";
         Uri gmmIntentUri = Uri.parse(location);
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
         mapIntent.setPackage("com.google.android.apps.maps");

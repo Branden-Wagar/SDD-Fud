@@ -1,6 +1,8 @@
 package fud.fud.Models
 
-class EventLocation {
+import java.io.Serializable
+
+class EventLocation : Serializable{
 
     var latitude : Double = 0.0
     var longitude : Double = 0.0
