@@ -74,6 +74,8 @@ class CreateEventVM(options: List<String>, curr: String, adapter: ArrayAdapter<S
         }
     }
 
+
+
     fun isValid() : Boolean {
         var isValid = isTimeValid()
         isValid = isEventDescValid() && isValid

@@ -34,11 +34,12 @@ class MainActivity : Activity() {
         var events = ArrayList<String>()
         var adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, events)
 
+        var t : ArrayList<String> = ArrayList(resources.getStringArray(R.array.food_tags).toList())
         //var events = ArrayList<String>()
         //var adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, events)
 
         val binding: ActivityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        activityVM = MainActivityVM(this)
+        activityVM = MainActivityVM(this, t)
         binding.mainvm = activityVM
         val button: Button = findViewById(R.id.CreateEventButton)
         button.setOnClickListener {
