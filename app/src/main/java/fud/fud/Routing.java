@@ -24,6 +24,7 @@ public class Routing extends Activity {
         String coordinates = Double.toString(eventLocation.getLatitude())+","+Double.toString(eventLocation.getLongitude());
         String location = "geo:0,0?q="+coordinates+"("+event.getEventName()+")";
         //start the google maps app and drop a pin on set lat/long with event name
+        //code pulled and modified from : https://developers.google.com/maps/documentation/urls/android-intents
         Uri gmmIntentUri = Uri.parse(location);
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
         mapIntent.setPackage("com.google.android.apps.maps");
