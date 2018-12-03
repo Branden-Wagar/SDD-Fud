@@ -42,10 +42,6 @@
         <activity
             android:name=".FakeEvent"
             android:label="@string/title_activity_fake_event" />
-
-        <activity
-            android:name=".Routing"
-            android:label="@string/title_activity_routing"></activity>
     </application>
 
 </manifest>
