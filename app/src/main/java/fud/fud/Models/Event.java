@@ -1,7 +1,5 @@
 package fud.fud.Models;
 
-
-import android.location.Location;
 import android.support.annotation.NonNull;
 
 import java.io.Serializable;

@@ -35,7 +35,7 @@ public class DatabaseManager implements IEventQuery {
      */
     public DatabaseManager(FirebaseFirestore db) {
         this.db = db;
-        eventCollection = db.collection(KeyStore.EVENT_TABLE_NAME);
+        eventCollection = db.collection("events");
     }
 
     /**
@@ -45,7 +45,7 @@ public class DatabaseManager implements IEventQuery {
      * @param e - Event to add to the database
      */
     public void add(Event e) {
-        this.add(e, KeyStore.EVENT_TABLE_NAME, e.getEventName());
+        this.add(e, "events", e.getEventName());
     }
 
     /**
@@ -84,13 +84,13 @@ public class DatabaseManager implements IEventQuery {
     /**
      * Get all events within a specified distance.
      * @param distanceToUser - Distance of the event to the user's current position.
-     * @param withInMaximumDistance - Maximum distance of event from the user.
+     * @param withinMaximumDistance - Maximum distance of event from the user.
      * @return A QuerySnapShot of all of the events within this distance.
      */
     @Override
-    public Task<QuerySnapshot> getLocalEvents(double distanceToUser, double withInMaximumDistance) {
+    public Task<QuerySnapshot> getLocalEvents(double distanceToUser, double withinMaximumDistance) {
         return eventCollection
-                .whereGreaterThan(KeyStore.EVENT_DISTANCE, withInMaximumDistance)
+                .whereGreaterThan("distance", withinMaximumDistance)
                 .get();
     }
 
@@ -104,7 +104,7 @@ public class DatabaseManager implements IEventQuery {
     public Task<QuerySnapshot> getCuisineFilteredFoodEvents(String cuisineType) {
 
         return eventCollection
-            .whereEqualTo(KeyStore.EVENT_CUISINE_TYPE, cuisineType)
+            .whereEqualTo("cuisineType", cuisineType)
             .get();
     }
 
@@ -116,7 +116,7 @@ public class DatabaseManager implements IEventQuery {
     @Override
     public Task<QuerySnapshot> getPriceFilteredEvents(double maximumPrice) {
         return eventCollection
-                .whereLessThanOrEqualTo(KeyStore.EVENT_PRICE, maximumPrice)
+                .whereLessThanOrEqualTo("price", maximumPrice)
                 .get();
     }
     /**
@@ -128,8 +128,8 @@ public class DatabaseManager implements IEventQuery {
     @Override
     public Task<QuerySnapshot> getPriceFilteredEvents(double minimumPrice, double maximumPrice) {
         return eventCollection
-                .whereLessThanOrEqualTo(KeyStore.EVENT_PRICE, maximumPrice)
-                .whereGreaterThanOrEqualTo(KeyStore.EVENT_PRICE, minimumPrice)
+                .whereLessThanOrEqualTo("price", maximumPrice)
+                .whereGreaterThanOrEqualTo("price", minimumPrice)
                 .get();
     }
 
@@ -139,7 +139,7 @@ public class DatabaseManager implements IEventQuery {
      */
     @Override
     public Task<QuerySnapshot> getAllEvents() {
-        return getAll(KeyStore.EVENT_TABLE_NAME);
+        return getAll("events");
     }
 
     /**
@@ -149,7 +149,7 @@ public class DatabaseManager implements IEventQuery {
     @Override
     public Task<QuerySnapshot> getTodayEvents() {
         return eventCollection
-                .whereEqualTo(KeyStore.EVENT_DATE, java.time.LocalDate.now())
+                .whereEqualTo("date", java.time.LocalDate.now())
                 .get();
     }
 
@@ -161,7 +161,7 @@ public class DatabaseManager implements IEventQuery {
     @Override
     public Task<QuerySnapshot> getDateSpecificEvents(Date date) {
         return eventCollection
-                .whereEqualTo(KeyStore.EVENT_DATE, date)
+                .whereEqualTo("date", date)
                 .get();
     }
 
