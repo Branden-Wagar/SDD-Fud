@@ -10,6 +10,7 @@ import android.databinding.ObservableField
 import android.location.Location
 import android.location.LocationManager
 import android.support.v4.content.ContextCompat
+import android.support.v4.content.ContextCompat.startActivity
 import fud.fud.Models.Event
 import java.sql.Date
 import java.time.Instant
@@ -20,7 +21,7 @@ import fud.fud.Models.EventLocation
 import fud.fud.Models.LocationManagerLocal
 
 
-class CreateEventVM(options: List<String>, curr: String, adapter: ArrayAdapter<String>, loc : Location?) : ViewModel() {
+class CreateEventVM(ct: Context, options: List<String>, curr: String, adapter: ArrayAdapter<String>, loc : Location?) : ViewModel() {
 
 
     var EndTime = ObservableField<String>("1:30")
@@ -41,7 +42,7 @@ class CreateEventVM(options: List<String>, curr: String, adapter: ArrayAdapter<S
     var foodTag : ObservableField<String> = ObservableField(curr)
     var adapter : ObservableField<ArrayAdapter<String>> = ObservableField(adapter)
     var foodTagIndex : ObservableField<Int> = ObservableField(0)
-
+    val context =ct
 
 
 
@@ -71,7 +72,11 @@ class CreateEventVM(options: List<String>, curr: String, adapter: ArrayAdapter<S
         if (isValid()) {
             val db = DatabaseManager(FirebaseFirestore.getInstance())
             db.add(toSubmit)
+            context.startActivity(Intent(context,MainActivity::class.java))
         }
+
+
+
     }
 
 

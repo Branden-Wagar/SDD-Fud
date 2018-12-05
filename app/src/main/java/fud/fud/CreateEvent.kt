@@ -45,7 +45,7 @@ class CreateEvent : Activity() {
                     bestLocation = null
                 }
         val binding: ActivityCreateEventBinding = DataBindingUtil.setContentView(this, R.layout.activity_create_event)
-        binding.createEventVM = CreateEventVM(t, "Chinese", adapter, bestLocation)
+        binding.createEventVM = CreateEventVM(this, t, "Chinese", adapter, bestLocation)
 
     }
 }
