@@ -180,9 +180,6 @@ class MainActivityVM( ct : Context, foodTagOptions : List<String>) : BaseObserva
         eventString = localEvents
         events = eventsL
         EventsListAdapter.set(ArrayAdapter(parentContext, android.R.layout.simple_list_item_1, localEvents))
-
-
-
     }
 
     /*

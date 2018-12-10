@@ -42,7 +42,7 @@ class CreateEventVM(ct: Context, options: List<String>, curr: String, adapter: A
     var foodTag : ObservableField<String> = ObservableField(curr)
     var adapter : ObservableField<ArrayAdapter<String>> = ObservableField(adapter)
     var foodTagIndex : ObservableField<Int> = ObservableField(0)
-    val context =ct
+    val context = ct
 
 
 
@@ -90,7 +90,7 @@ class CreateEventVM(ct: Context, options: List<String>, curr: String, adapter: A
         return isValid
     }
 
-    private fun isEventDescValid(): Boolean {
+    fun isEventDescValid(): Boolean {
         return if (EventDesc.get()!!.isNotEmpty()) {
             EventDescError.set(null)
             true
@@ -100,7 +100,7 @@ class CreateEventVM(ct: Context, options: List<String>, curr: String, adapter: A
         }
     }
 
-    private fun isEventNameValid(): Boolean {
+    fun isEventNameValid(): Boolean {
         return if (EventName.get() != null && EventName.get()!!.length > 5) {
             EventNameError.set(null)
             true
@@ -111,7 +111,7 @@ class CreateEventVM(ct: Context, options: List<String>, curr: String, adapter: A
         }
     }
 
-    private fun isPriceValid(): Boolean {
+    fun isPriceValid(): Boolean {
         var pricePattern = "^([0-9]*)(\\.[0-9][0-9])?\$".toRegex()
         return if (MaxPrice.get()!!.isNotEmpty() && MaxPrice.get()!!.toDouble() >= 0
                 && pricePattern.matches(MaxPrice.get()!!)) {
@@ -123,7 +123,7 @@ class CreateEventVM(ct: Context, options: List<String>, curr: String, adapter: A
         }
     }
 
-    private fun isTimeValid(): Boolean {
+    fun isTimeValid(): Boolean {
         var timePattern = "^(0?[1-9]|1[0-2]):[0-5][0-9]\$".toRegex()
 
         return if (EndTime.get()!!.isNotEmpty() && timePattern.matches(EndTime.get()!!)) {

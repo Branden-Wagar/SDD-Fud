@@ -53,6 +53,54 @@ class CreateEventVMTest {
         assert(testBool)
     }
 
+    @Test
+    fun invalidDescTest() {
+        createEventVM.EventDesc.set("")
+        assertFalse(createEventVM.isEventDescValid())
+    }
 
+    @Test
+    fun validDescTest() {
+        createEventVM.EventDesc.set("Valid description.")
+        assertTrue(createEventVM.isEventDescValid())
+    }
 
+    @Test
+    fun invalidNameTest() {
+        createEventVM.EventName.set("short")
+        assertFalse(createEventVM.isEventNameValid())
+    }
+
+    @Test
+    fun validNameTest() {
+        createEventVM.EventName.set("long name")
+        assertTrue(createEventVM.isEventNameValid())
+    }
+
+    @Test
+    fun invalidPriceTest() {
+        createEventVM.MaxPrice.set("")
+        assertFalse(createEventVM.isPriceValid())
+
+        createEventVM.MaxPrice.set("-1.99")
+        assertFalse(createEventVM.isPriceValid())
+    }
+
+    @Test
+    fun validPriceTest() {
+        createEventVM.MaxPrice.set("1.00")
+        assertTrue(createEventVM.isPriceValid())
+    }
+
+    @Test
+    fun invalidTimeTest() {
+        createEventVM.EndTime.set("")
+        assertFalse(createEventVM.isTimeValid())
+    }
+
+    @Test
+    fun validTimeText() {
+        createEventVM.EndTime.set("09:00")
+        assertTrue(createEventVM.isTimeValid())
+    }
 }

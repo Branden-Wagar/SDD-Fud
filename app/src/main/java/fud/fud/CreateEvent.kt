@@ -46,6 +46,5 @@ class CreateEvent : Activity() {
                 }
         val binding: ActivityCreateEventBinding = DataBindingUtil.setContentView(this, R.layout.activity_create_event)
         binding.createEventVM = CreateEventVM(this, t, "Chinese", adapter, bestLocation)
-
     }
 }
