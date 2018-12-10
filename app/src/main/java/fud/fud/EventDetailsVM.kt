@@ -18,7 +18,7 @@ class EventDetailsVM (event:Event): ViewModel() {
     val price = event.getPrice()
     //bind these values to the page
     var filter1 = ObservableField<String>(name)
-    var filter2= ObservableField<String>(distance.toString()+" miles")
+    var filter2= ObservableField<String>(distance.toString()+" KM")
     var filter3=ObservableField<String>(discription)
     var filter5 = ObservableField<String>("$"+price.toString())
 

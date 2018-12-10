@@ -47,81 +47,78 @@
             android:inputType="text"
             android:text="@={createEventVM.eventName}"
             android:textAlignment="viewStart"
+            app:error="@{createEventVM.eventNameError}"
             app:layout_constraintBottom_toTopOf="@+id/FoodTypeSpinner"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/FudTitle"
             app:layout_constraintVertical_chainStyle="spread"
-            app:error="@{createEventVM.eventNameError}"/>
+            android:singleLine="true"/>
 
         <Spinner
             android:id="@+id/FoodTypeSpinner"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
             android:layout_marginTop="18dp"
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="18dp"
-            app:layout_constraintBottom_toTopOf="@+id/PriceBox"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/EventNameBox"
             android:adapter="@{createEventVM.adapter}"
             android:selectedItemPosition="@={createEventVM.foodTagIndex}"
-            />
+            app:layout_constraintBottom_toTopOf="@+id/PriceBox"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/LeftGuide"
+            app:layout_constraintTop_toBottomOf="@+id/EventNameBox" />
 
         <EditText
             android:id="@+id/PriceBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="64dp"
             android:layout_marginTop="18dp"
-            android:layout_marginEnd="64dp"
+            android:layout_marginEnd="32dp"
             android:ems="10"
             android:hint="Enter Amount (x.xx)"
             android:text="@={createEventVM.maxPrice}"
+            app:error="@{createEventVM.maxPriceError}"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/LeftGuide"
             app:layout_constraintTop_toBottomOf="@+id/FoodTypeSpinner"
-            app:error="@{createEventVM.maxPriceError}"/>
+            android:singleLine="true"/>
 
         <EditText
             android:id="@+id/EndTimeBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="84dp"
             android:layout_marginTop="18dp"
             android:layout_marginEnd="84dp"
             android:layout_marginBottom="18dp"
             android:ems="10"
             android:hint="EndTime"
             android:text="@={createEventVM.endTime}"
+            app:error="@{createEventVM.endTimeError}"
             app:layout_constraintBottom_toTopOf="@+id/EventDetailsBox"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/LeftGuide"
             app:layout_constraintTop_toBottomOf="@+id/PriceBox"
-            app:error="@{createEventVM.endTimeError}"/>
+            android:singleLine="true"/>
 
         <EditText
             android:id="@+id/EventDetailsBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="32dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="16dp"
             android:layout_marginBottom="18dp"
             android:ems="10"
             android:hint="Further Event Details"
             android:inputType="textMultiLine"
             android:text="@={createEventVM.eventDesc}"
+            app:error="@{createEventVM.eventDescError}"
             app:layout_constraintBottom_toTopOf="@+id/CreateEventButton"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/EndTimeBox"
-            app:error="@{createEventVM.eventDescError}"/>
+            app:layout_constraintTop_toBottomOf="@+id/EndTimeBox" />
 
         <Button
             android:id="@+id/CreateEventButton"
@@ -131,12 +128,56 @@
             android:layout_marginTop="32dp"
             android:layout_marginEnd="128dp"
             android:layout_marginBottom="16dp"
+            android:onClickListener="@{() -> createEventVM.onClickCreateButton()}"
             android:text="Create Event"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:onClickListener="@{() -> createEventVM.onClickCreateButton()}"
             app:layout_constraintTop_toBottomOf="@+id/EventDetailsBox" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/LeftGuide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="80dp"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/PriceLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Price:"
+            android:textAlignment="viewEnd"
+            app:layout_constraintBottom_toBottomOf="@+id/PriceBox"
+            app:layout_constraintEnd_toStartOf="@+id/LeftGuide"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/PriceBox" />
+
+        <TextView
+            android:id="@+id/EndTimeLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="EndTime:"
+            android:textAlignment="textEnd"
+            app:layout_constraintBottom_toBottomOf="@+id/EndTimeBox"
+            app:layout_constraintEnd_toStartOf="@+id/LeftGuide"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/EndTimeBox" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Food Type:"
+            app:layout_constraintBottom_toBottomOf="@+id/FoodTypeSpinner"
+            app:layout_constraintEnd_toStartOf="@+id/LeftGuide"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/FoodTypeSpinner" />
 
     </android.support.constraint.ConstraintLayout>
 

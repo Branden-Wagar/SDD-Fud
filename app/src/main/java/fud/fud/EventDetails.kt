@@ -30,9 +30,17 @@ class EventDetails : Activity() {
         //if route button is clicked start the routing activity and pass it the event
         val button: Button = findViewById<Button>(R.id.RouteButton)
         button.setOnClickListener({
-            val intent = Intent(this,Routing::class.java)
-            intent.putExtra("Event",event)
-            startActivity(intent)
+            //get the location's coordinates
+            val eventLocation = event.location
+            val coordinates = java.lang.Double.toString(eventLocation.latitude) + "," + java.lang.Double.toString(eventLocation.longitude)
+            val location = "geo:0,0?q=" + coordinates + "(" + event.eventName + ")"
+            //start the google maps app and drop a pin on set lat/long with event name
+            //code pulled and modified from : https://developers.google.com/maps/documentation/urls/android-intents
+            val gmmIntentUri = Uri.parse(location)
+            val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+            mapIntent.setPackage("com.google.android.apps.maps")
+            startActivity(mapIntent)
+
         })
 
         //if fake button is clicked start the fake event activity
