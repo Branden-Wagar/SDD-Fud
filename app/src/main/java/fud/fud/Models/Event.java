@@ -18,6 +18,8 @@ public class Event implements Serializable {
     // TODO: Implement User class eventually
     // private User user;
 
+    // Create a dummy event object for
+    // object deserialization using Firebase.
     public Event() {
         this.eventName = "";
         this.date = new Date();
@@ -28,6 +30,8 @@ public class Event implements Serializable {
         this.price = 0.0;
     }
 
+    // Create an event object with all
+    // fields specified
     public Event(Date date, String address, String description, String cuisineType, String eventName,
                  double price, EventLocation location) {
         this.date = date;
@@ -40,6 +44,8 @@ public class Event implements Serializable {
         // Need to initialize distanceToUser
     }
 
+    // Getters and setters for object deserialization
+    // using firebase
     public String getEventName() { return eventName; }
     public Date getDate() { return date; }
     public String getAddress() { return address; }
@@ -58,6 +64,12 @@ public class Event implements Serializable {
     public void setPrice(double d) { price = d; }
     public void setLocation(EventLocation l) {location = l; }
 
+    /**
+     * Stringify this event object.
+     *
+     * @return String representation of an event object
+     * for the ListView within MainActivity.
+     */
     @NonNull
     public String toString() {
         StringBuilder result = new StringBuilder();

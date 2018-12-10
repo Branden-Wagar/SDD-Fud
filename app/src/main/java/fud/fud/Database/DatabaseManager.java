@@ -50,8 +50,8 @@ public class DatabaseManager implements IEventQuery {
 
     /**
      * Add an object to a specified collection within the FireStore.
-     * @param obj - Object to add to the collection
-     * @param collection - Name of collection object is being added to.
+     * @param obj - Object tso add to the collection
+     * @param collection - Name of collection object is being adde          //d to.
      * @param <T> - Generic type handling
      */
     private <T> void add(T obj, String collection, String document) {
