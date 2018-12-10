@@ -173,4 +173,39 @@ public class DatabaseManager implements IEventQuery {
     public Task<QuerySnapshot> getEventObect() {
         return null;
     }
+
+
+
+    /* Delete functions (mostly needed for testing, but will also be useful eventually. */
+    /**
+     * Delete an event by calling the generic delete method
+     * with the correct table name.
+     *
+     * @param e - Event to delete from the database
+     */
+    public void delete(Event e) {
+        this.delete("events", e.getEventName());
+    }
+
+    /**
+     * Delete a document from a specified collection within the FireStore.
+     * @param collection - Name of collection document is being deleted from.
+     * @param document - Name of document to be deleted.
+     */
+    private void delete(String collection, String document) {
+        db.collection(collection).document(document)
+                .delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully deleted!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error deleting document", e);
+                    }
+                });
+    }
 }

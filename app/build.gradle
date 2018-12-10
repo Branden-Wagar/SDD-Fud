@@ -25,6 +25,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
 }
 
 dependencies {
@@ -41,6 +44,13 @@ dependencies {
     implementation 'com.google.android.gms:play-services-maps:16.0.0'
     implementation "android.arch.lifecycle:extensions:1.1.1" // for viewmodel/livedata
     implementation "android.arch.lifecycle:viewmodel:1.1.0"
+
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
+    androidTestImplementation 'androidx.test:runner:1.1.0'
+    androidTestImplementation 'androidx.test:rules:1.1.0'
+
+    testImplementation 'org.mockito:mockito-core:2.7.22'
+    androidTestImplementation 'org.mockito:mockito-android:2.7.22'
 }
 
 apply plugin: 'com.google.gms.google-services'
