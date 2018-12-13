@@ -24,13 +24,13 @@ import fud.fud.Models.LocationManagerLocal
 class CreateEventVM(ct: Context, options: List<String>, curr: String, adapter: ArrayAdapter<String>, loc : Location?) : ViewModel() {
 
 
-    var EndTime = ObservableField<String>("1:30")
+    var EndTime = ObservableField<String>("")
     var EndTimeError = ObservableField<String>()
 
     var EventName = ObservableField<String>("")
     var EventNameError = ObservableField<String>()
 
-    var MaxPrice = ObservableField<String>("0.00")
+    var MaxPrice = ObservableField<String>("")
     var MaxPriceError = ObservableField<String>()
 
     var EventDesc = ObservableField<String>("")

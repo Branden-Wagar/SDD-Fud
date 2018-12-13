@@ -13,7 +13,8 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity">
+        tools:context=".MainActivity"
+        android:background="@color/colorPrimary">
 
         <android.support.constraint.Guideline
             android:id="@+id/CenterLine"
@@ -30,6 +31,7 @@
             android:layout_marginTop="4dp"
             android:layout_marginEnd="8dp"
             android:text="@string/app_title"
+            android:textColor="@color/textColor"
             android:textAlignment="center"
             android:textSize="30sp"
             android:textStyle="bold"
@@ -45,6 +47,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="18dp"
             android:text="@string/eventsList"
+            android:textColor="@color/textColor"
             android:textAlignment="center"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -59,6 +62,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="18dp"
             android:text="@string/eventFilters"
+            android:textColor="@color/textColor"
             android:textAlignment="center"
             android:textSize="24sp"
             app:layout_constraintEnd_toStartOf="@+id/CenterLine"
@@ -83,58 +87,79 @@
                 android:id="@+id/Filter1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAlignment="textStart"
+                android:layout_margin="5dp"
+                android:checked="@={mainvm.freeEventOnly}"
                 android:text="@={mainvm.FreeFoodFilter}"
-                android:checked="@={mainvm.freeEventOnly}"/>
+                android:textAlignment="textStart"
+                android:textColor="@color/textColor" />
 
             <Switch
                 android:id="@+id/Filter3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@={mainvm.foodTagFilter}"
+                android:layout_margin="5dp"
                 android:checked="@={mainvm.foodTagOnly}"
+                android:text="@={mainvm.foodTagFilter}"
+                android:textColor="@color/textColor"
                 tools:text="Filter 3" />
 
             <TextView
                 android:id="@+id/DistanceLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:text="@string/MaxDistanceLabel"
                 android:textAlignment="center"
+                android:textColor="@color/textColor"
                 android:textStyle="bold" />
 
             <SeekBar
                 android:id="@+id/DistanceSeekBar"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:min="0"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
                 android:max="100"
-                android:progress="@={mainvm.distanceLimit}"/>
+                android:min="0"
+                android:progress="@={mainvm.distanceLimit}" />
 
 
             <TextView
                 android:id="@+id/PriceLimitLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:text="@string/MaxPriceLabel"
                 android:textAlignment="center"
+                android:textColor="@color/textColor"
                 android:textStyle="bold" />
 
             <SeekBar
                 android:id="@+id/PriceLimitSeekBar"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:min="0"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
                 android:max="100"
-                android:progress="@={mainvm.priceLimit}"/>
+                android:min="0"
+                android:progress="@={mainvm.priceLimit}" />
 
 
             <Spinner
                 android:id="@+id/FoodTagsSpinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:adapter="@{mainvm.foodTypeFilters}"
-                android:selectedItemPosition="@={mainvm.foodTagIndex}"/>
+                android:selectedItemPosition="@={mainvm.foodTagIndex}" />
         </LinearLayout>
 
 
@@ -146,6 +171,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="16dp"
+            android:textColor="@color/textColor"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/CenterLine"
@@ -154,12 +180,13 @@
 
         <Button
             android:id="@+id/CreateEventButton"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="48dp"
+            android:background="@color/colorAccent"
             android:text="@string/CreateEventLabel"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/CenterLine"

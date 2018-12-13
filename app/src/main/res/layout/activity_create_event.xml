@@ -15,7 +15,8 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".CreateEvent">
+        tools:context=".CreateEvent"
+        android:background="@color/colorPrimary">
 
         <TextView
             android:id="@+id/FudTitle"
@@ -28,6 +29,7 @@
             android:textAlignment="center"
             android:textSize="30sp"
             android:textStyle="bold"
+            android:textColor="@color/colorAccent"
             app:layout_constraintBottom_toTopOf="@+id/EventNameBox"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.263"
@@ -40,21 +42,24 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="84dp"
             android:layout_marginTop="18dp"
-            android:layout_marginEnd="85dp"
+            android:layout_marginEnd="32dp"
             android:layout_marginBottom="18dp"
+            android:backgroundTint="@color/colorAccent"
             android:ems="10"
             android:hint="Enter Event Name"
             android:inputType="text"
+            android:singleLine="true"
             android:text="@={createEventVM.eventName}"
             android:textAlignment="viewStart"
+            android:textColor="@color/textColor"
+            android:textColorHint="@color/textColor"
             app:error="@{createEventVM.eventNameError}"
             app:layout_constraintBottom_toTopOf="@+id/FoodTypeSpinner"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/FudTitle"
-            app:layout_constraintVertical_chainStyle="spread"
-            android:singleLine="true"/>
+            app:layout_constraintVertical_chainStyle="spread" />
 
         <Spinner
             android:id="@+id/FoodTypeSpinner"
@@ -65,6 +70,7 @@
             android:layout_marginBottom="18dp"
             android:adapter="@{createEventVM.adapter}"
             android:selectedItemPosition="@={createEventVM.foodTagIndex}"
+            android:backgroundTint="@color/colorAccent"
             app:layout_constraintBottom_toTopOf="@+id/PriceBox"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/LeftGuide"
@@ -78,7 +84,10 @@
             android:layout_marginEnd="32dp"
             android:ems="10"
             android:hint="Enter Amount (x.xx)"
+            android:textColorHint="@color/textColor"
             android:text="@={createEventVM.maxPrice}"
+            android:textColor="@color/textColor"
+            android:backgroundTint="@color/colorAccent"
             app:error="@{createEventVM.maxPriceError}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/LeftGuide"
@@ -90,17 +99,20 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="18dp"
-            android:layout_marginEnd="84dp"
+            android:layout_marginEnd="32dp"
             android:layout_marginBottom="18dp"
+            android:backgroundTint="@color/colorAccent"
             android:ems="10"
             android:hint="EndTime"
+            android:singleLine="true"
             android:text="@={createEventVM.endTime}"
+            android:textColor="@color/textColor"
+            android:textColorHint="@color/textColor"
             app:error="@{createEventVM.endTimeError}"
             app:layout_constraintBottom_toTopOf="@+id/EventDetailsBox"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/LeftGuide"
-            app:layout_constraintTop_toBottomOf="@+id/PriceBox"
-            android:singleLine="true"/>
+            app:layout_constraintTop_toBottomOf="@+id/PriceBox" />
 
         <EditText
             android:id="@+id/EventDetailsBox"
@@ -112,8 +124,12 @@
             android:layout_marginBottom="18dp"
             android:ems="10"
             android:hint="Further Event Details"
+            android:textColorHint="@color/textColor"
             android:inputType="textMultiLine"
             android:text="@={createEventVM.eventDesc}"
+            android:textColor="@color/textColor"
+            android:backgroundTint="@color/colorAccent"
+            android:textAlignment="center"
             app:error="@{createEventVM.eventDescError}"
             app:layout_constraintBottom_toTopOf="@+id/CreateEventButton"
             app:layout_constraintEnd_toEndOf="parent"
@@ -122,6 +138,8 @@
 
         <Button
             android:id="@+id/CreateEventButton"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:backgroundTint="@color/colorAccent"
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_marginStart="128dp"
@@ -130,6 +148,7 @@
             android:layout_marginBottom="16dp"
             android:onClickListener="@{() -> createEventVM.onClickCreateButton()}"
             android:text="Create Event"
+            android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -143,41 +162,6 @@
             android:orientation="vertical"
             app:layout_constraintGuide_begin="80dp"
             app:layout_constraintStart_toStartOf="parent" />
-
-        <TextView
-            android:id="@+id/PriceLabel"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="Price:"
-            android:textAlignment="viewEnd"
-            app:layout_constraintBottom_toBottomOf="@+id/PriceBox"
-            app:layout_constraintEnd_toStartOf="@+id/LeftGuide"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/PriceBox" />
-
-        <TextView
-            android:id="@+id/EndTimeLabel"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="EndTime:"
-            android:textAlignment="textEnd"
-            app:layout_constraintBottom_toBottomOf="@+id/EndTimeBox"
-            app:layout_constraintEnd_toStartOf="@+id/LeftGuide"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/EndTimeBox" />
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="Food Type:"
-            app:layout_constraintBottom_toBottomOf="@+id/FoodTypeSpinner"
-            app:layout_constraintEnd_toStartOf="@+id/LeftGuide"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/FoodTypeSpinner" />
 
     </android.support.constraint.ConstraintLayout>
 

@@ -15,7 +15,8 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".EventDetails">
+        tools:context=".EventDetails"
+        android:background="@color/colorPrimary">
 
         <EditText
             android:id="@+id/Price"
@@ -28,6 +29,8 @@
             android:textSize="20sp"
             android:inputType="textPersonName"
             android:text="@={eventDetailsVM.filter5}"
+            android:textColor="@color/textColor"
+            android:backgroundTint="@color/colorAccent"
             app:layout_constraintEnd_toStartOf="@+id/DistanceText"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -44,6 +47,8 @@
             android:textSize="20sp"
             android:inputType="textPersonName"
             android:text="@={eventDetailsVM.filter2}"
+            android:textColor="@color/textColor"
+            android:backgroundTint="@color/colorAccent"
             app:layout_constraintBottom_toTopOf="@+id/EventNameText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -59,6 +64,8 @@
             android:textSize="20sp"
             android:inputType="none"
             android:text="@={eventDetailsVM.filter1}"
+            android:textColor="@color/textColor"
+            android:backgroundTint="@color/colorAccent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -74,8 +81,11 @@
             android:ems="10"
             android:textSize="20sp"
             android:hint="No Description Provided"
+            android:textColorHint="@color/textColor"
             android:inputType="textMultiLine"
             android:text="@={eventDetailsVM.filter3}"
+            android:textColor="@color/textColor"
+            android:backgroundTint="@color/colorAccent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/EventNameText" />
@@ -88,6 +98,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="16dp"
             android:text="VERIFY"
+            android:backgroundTint="@color/colorAccent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -101,6 +112,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:text="ROUTE"
+            android:backgroundTint="@color/colorAccent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -115,6 +127,7 @@
             android:layout_marginEnd="44dp"
             android:layout_marginBottom="16dp"
             android:text="FAKE"
+            android:backgroundTint="@color/colorAccent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/RouteButton"
             app:layout_constraintHorizontal_bias="0.562"
